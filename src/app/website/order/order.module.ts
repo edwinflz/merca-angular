@@ -9,10 +9,12 @@ import { CreateOrderComponent } from './container/create-order/create-order.comp
 import { DialogCreateOrderComponent } from './container/dialog-create-order/dialog-create-order.component';
 import { FormOrderComponent } from './components/form-order/form-order.component';
 import { TableOrderComponent } from './components/table-order/table-order.component';
+import { CardOrderComponent } from './components/card-order/card-order.component';
+import { SkeletonCardComponent } from './components/skeleton-card/skeleton-card.component';
 
 
 @NgModule({
-  declarations: [ListOrderComponent, CreateOrderComponent, DialogCreateOrderComponent, FormOrderComponent, TableOrderComponent],
+  declarations: [ListOrderComponent, CreateOrderComponent, DialogCreateOrderComponent, FormOrderComponent, TableOrderComponent, CardOrderComponent, SkeletonCardComponent],
   imports: [
     CommonModule,
     OrderRoutingModule,

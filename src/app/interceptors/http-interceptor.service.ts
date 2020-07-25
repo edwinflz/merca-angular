@@ -44,16 +44,14 @@ export class HttpInterceptorService implements HttpInterceptor {
 
 
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
+    let errorMessage;
 
     if (error.error instanceof ErrorEvent) {
       // client-side error
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      errorMessage = error;
     }
-    // window.alert(errorMessage);
     return throwError(errorMessage);
   }
 }

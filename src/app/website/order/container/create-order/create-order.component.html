@@ -1,4 +1,4 @@
-<div class="container mt-2">
+<div class="container mt-2" *ngIf="!spinner">
   <div class="row">
     <div class="col-12">
       <mat-card>
@@ -6,17 +6,30 @@
           <mat-card-title>Registra y Envia Tú pedido</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-         <app-form-order (sendDetail)="receivedDetail($event)"></app-form-order>
+          <app-form-order
+            (sendDetail)="receivedDetail($event)"
+          ></app-form-order>
         </mat-card-content>
       </mat-card>
     </div>
   </div>
 </div>
 
-<div class="container mt-2 mb-4 pb-4">
+<div class="container mt-2 mb-4 pb-4" *ngIf="!spinner">
   <div class="row">
     <div class="col-12">
-      <app-table-order [detail]="detail" (deleteDetail)="deleteDetail($event)"></app-table-order>
+      <app-table-order
+        [detail]="detail"
+        (deleteDetail)="deleteDetail($event)"
+        (sendRequestSave)="saveOrder($event)"
+      ></app-table-order>
     </div>
   </div>
+</div>
+
+<div
+  class="row h-100 justify-content-center align-items-center"
+  *ngIf="spinner"
+>
+  <mat-spinner></mat-spinner>
 </div>
