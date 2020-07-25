@@ -1,0 +1,59 @@
+<div class="container mt-4 mb-4">
+  <div class="row">
+    <div class="col-12">
+      <mat-card>
+        <div class="row no-gutters">
+          <div class="col-lg-12">
+            <div class="d-flex justify-content-between align-items-center">
+              <mat-card-title>Deposito Duques</mat-card-title>
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+                aria-label="menu"
+                class="ml-auto"
+              >
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>visibility</mat-icon>
+                  <span>VER OFERTA</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>store</mat-icon>
+                  <span>VER TIENDA</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>delete_forever</mat-icon>
+                  <span>RECHAZAR</span>
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+          <div class="col-lg-12 text-center">
+            <mat-card-subtitle class="m-0"
+              >P-001: Calle 42 I # 17-71</mat-card-subtitle
+            >
+          </div>
+          <div class="col-lg-6 col-6 p-2 card__img--container">
+            <img
+              src="assets/img/restaurant.jpg"
+              alt="negocio"
+              class="card__img"
+            />
+          </div>
+          <div class="col-lg-6 col-6">
+            <div class="card-body">
+              <mat-chip-list aria-label="Fish selection">
+                <mat-chip>$150.000</mat-chip>
+                <mat-chip color="accent" selected [routerLink]="[1]"
+                  >VER OFERTA</mat-chip
+                >
+              </mat-chip-list>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

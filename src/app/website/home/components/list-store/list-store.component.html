@@ -1,0 +1,31 @@
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-12">
+      <mat-card class="p-0">
+        <google-map
+          width="100%"
+          height="200px"
+          [center]="center"
+          [zoom]="zoom"
+          [options]="options"
+        ></google-map>
+      </mat-card>
+      <div class="search__main">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Buscar"
+            aria-label="Buscar"
+            aria-describedby="button-addon2"
+          />
+          <div class="input-group-append" id="search-button">
+            <button class="search__button btn btn-info" type="button">
+              <mat-icon class="f-16">search</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

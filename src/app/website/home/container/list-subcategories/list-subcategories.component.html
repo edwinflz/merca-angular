@@ -1,0 +1,35 @@
+    <app-list-store></app-list-store>
+
+<div class="container mt-2 pb-4 mb-5">
+  <div class="row">
+    <div class="col-12">
+      <mat-card class="rounded-lg p-2 shadow">
+        <div
+          class="item mt-2 text-center"
+          *ngIf="categories.length == 0"
+        >
+          <app-skeleton-subcategories></app-skeleton-subcategories>
+        </div>
+        
+          <div class="row" *ngFor="let category of categories">
+            <div class="col-12">
+              <h2 class="text-center separate">{{ category.nombre_categoria }}</h2>
+            </div>
+            <div
+              class="col-3 mb-2"
+              *ngFor="let subcategory of category.subcategorias; let i = index"
+            >
+              <img
+                [alt]="subcategory.nombre_subcategoria"
+                [defaultImage]="spinner"
+                [lazyLoad]="subcategory.imagen"
+                (click)="openDialog(subcategory)"
+                class="img__subcategory img-fluid shadow-sm"
+              />
+            </div>
+          </div>
+        
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Listado de tú pedido</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Detalle</th>
+          <th scope="col">Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="detail.length === 0">
+          <td colspan="3">Aún no has añadido productos</td>
+        </tr>
+        <tr *ngFor="let item of detail; let index = index">
+          <th scope="row">{{ index + 1 }}</th>
+          <td>
+            {{ item.product }} x {{ item.amount }} {{ item.measure }}
+            {{ item.brand }}
+          </td>
+          <td>
+            <button
+              class="btn-sm"
+              mat-mini-fab
+              color="warn"
+              (click)="deleteItem(item.id)"
+            >
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button
+      mat-raised-button
+      color="primary"
+      class="btn-block mt-2"
+      (click)="confirmOrder()"
+      [disabled]="detail.length === 0"
+    >
+      Enviar solicitud
+    </button>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,84 @@
+<form [formGroup]="form" (ngSubmit)="saveShopper($event)">
+  <mat-form-field class="w-100" appearance="fill">
+    <mat-label>Municipio*</mat-label>
+    <mat-select formControlName="municipality" id="municipality">
+      <mat-option
+        *ngFor="let municipality of municipalities"
+        [value]="municipality.id"
+      >
+        {{ municipality.name }}</mat-option
+      >
+    </mat-select>
+    <mat-error *ngIf="municipalityField.hasError('required')"
+      >Este campo es requerido.</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Domicilio*</mat-label>
+    <input
+      matInput
+      type="text"
+      id="domicile"
+      placeholder="Digite su direccion de domicilio"
+      formControlName="domicile"
+    />
+    <mat-error *ngIf="domicileField.errors && domicileField.dirty">
+      <p *ngIf="domicileField.hasError('required')">
+        El campo es requerido
+      </p>
+    </mat-error>
+    <mat-icon matSuffix>bubble_chart</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>2.) Domicilio (Opcional)</mat-label>
+    <input
+      matInput
+      type="text"
+      id="domicileTwo"
+      placeholder="Digite otro domicilio (opcional)"
+      formControlName="domicileTwo"
+    />
+    <mat-icon matSuffix>bubble_chart</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>3.) Domicilio (Opcional)</mat-label>
+    <input
+      matInput
+      type="text"
+      id="domicileThree"
+      placeholder="Digite otro domicilio (opcional)"
+      formControlName="domicileThree"
+    />
+    <mat-icon matSuffix>bubble_chart</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field class="w-100" appearance="outline">
+    <ngx-mat-file-input
+      #removableInput
+      formControlName="profile"
+      placeholder="Subir Foto"
+      valuePlaceholder="No ha Selecciona una foto"
+      required
+    ></ngx-mat-file-input>
+    <mat-error *ngIf="profileField.hasError('required')">
+      Por Favor Selecciona una foto
+    </mat-error>
+    <mat-error *ngIf="profileField.hasError('maxContentSize')">
+      El tamaño total no debe exceder a
+      {{ profileField.getError("maxContentSize").maxSize | byteFormat }} ({{
+        profileField.getError("maxContentSize").actualSize | byteFormat
+      }}).
+    </mat-error>
+    <button
+      mat-icon-button
+      matSuffix
+      *ngIf="!removableInput.empty"
+      (click)="removableInput.clear($event)"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-form-field>
+</form>

@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Falta poco!</h1>
+<div mat-dialog-content>
+  <strong>Completa los siguientes campos para enviar tu pedido</strong>
+  <form [formGroup]="form" (ngSubmit)="doAction()">
+    <mat-form-field class="w-100" appearance="fill">
+      <mat-label>Comentario</mat-label>
+      <textarea
+        matInput
+        formControlName="commentary"
+        id="commentary"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="fill">
+      <mat-label>Metodo de Pago*</mat-label>
+      <mat-select formControlName="payment" id="payment">
+        <mat-option *ngFor="let option of payments" [value]="option">
+          {{ option }}</mat-option
+        >
+      </mat-select>
+      <mat-error *ngIf="paymentField.hasError('required')">Este campo es requerido.</mat-error>
+    </mat-form-field>
+   
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-button
+    mat-raised-button
+    color="primary"
+    (click)="doAction()"
+    [disabled]="form.invalid"
+    class="mb-2"
+  >
+    ENVIAR PEDIDO
+  </button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">
+    CANCELAR
+  </button>
+</div>

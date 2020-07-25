@@ -1,0 +1,36 @@
+.search__main {
+  position: absolute;
+  top: 5%;
+  width: 90%;
+  & input:hover {
+    box-shadow: 0 1px 6px 0 #20212447;
+    border-color: #dfe1e500;
+  }
+}
+
+.search__main .input-group {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.search__button:hover {
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.search__button:focus {
+  box-shadow: none;
+}
+
+@media screen and (min-width: 768px) {
+  .search__main .input-group {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .search__main .input-group {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
