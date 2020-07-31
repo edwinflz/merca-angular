@@ -1,9 +1,11 @@
 export interface OrderShopper {
     id: number;
     status: number;
-    subcategoria: {
+    date: Date;
+    subcategory: {
         id: number,
-        name: string,
+        nameSubcategory: string,
+        description: string,
         img: string
     };
 }

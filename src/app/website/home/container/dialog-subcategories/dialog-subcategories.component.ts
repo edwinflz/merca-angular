@@ -25,7 +25,7 @@ export class DialogSubcategoriesComponent implements OnInit {
 
   navigateToCreateOrder(id: number): void {
     this.close();
-    this.router.navigate(['website/shopper/order', id]);
+    this.router.navigate(['shopper/order', id]);
   }
 
   close(): void {

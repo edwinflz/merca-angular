@@ -1,10 +1,14 @@
 <div class="container mt-2" *ngIf="!spinner">
   <div class="row">
+    <div class="col-12 mb-2 mt-2">
+      <mat-card class="rounded-lg p-2 bg-purple">
+        <h1 class="text-center separate">Registra y envia tú pedido!</h1>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-12">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Registra y Envia Tú pedido</mat-card-title>
-        </mat-card-header>
+      <mat-card class="rounded">
         <mat-card-content>
           <app-form-order
             (sendDetail)="receivedDetail($event)"
@@ -17,6 +21,13 @@
 
 <div class="container mt-2 mb-4 pb-4" *ngIf="!spinner">
   <div class="row">
+    <div class="col-12 mb-2 mt-2">
+      <mat-card class="rounded-lg p-2 bg-purple">
+        <h1 class="text-center separate">Detalle de tú pedido!</h1>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-12">
       <app-table-order
         [detail]="detail"
@@ -27,9 +38,6 @@
   </div>
 </div>
 
-<div
-  class="row h-100 justify-content-center align-items-center"
-  *ngIf="spinner"
->
-  <mat-spinner></mat-spinner>
+<div [ngStyle]="{ height: spinner ? '100vh' : '' }" class="container bg-white" *ngIf="spinner">
+  <app-spinner [spinner]="spinner"></app-spinner>
 </div>

@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 })
 export class SubcategoryService {
 
-  private url = `${environment.url_api}/api/categorias`;
+  private url = `${environment.url_api}/api/categories`;
 
   constructor(private http: HttpClient) { }
 

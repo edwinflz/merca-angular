@@ -1,0 +1,54 @@
+<mat-card class="mb-2 mat-elevation-z8 rounded-lg">
+  <div class="row no-gutters">
+    <div class="col-lg-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <mat-card-title>{{ offer.nameBusiness }}</mat-card-title>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="menu"
+          class="ml-auto"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <a mat-menu-item [routerLink]="[offer.offerId]">
+            <mat-icon>visibility</mat-icon>
+            <span>VER OFERTA</span>
+          </a>
+          <!-- <button mat-menu-item>
+            <mat-icon>store</mat-icon>
+            <span>VER TIENDA</span>
+          </button> -->
+          <button mat-menu-item>
+            <mat-icon>delete_forever</mat-icon>
+            <span>RECHAZAR</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+    <div class="col-lg-12 text-center">
+      <mat-card-subtitle class="m-0"
+        >{{ offer.nameSubcategory }} -
+        {{ offer.dateOffer | date: "short" }}</mat-card-subtitle
+      >
+      <!-- <mat-card-subtitle class="m-0 mt-1"
+        >Horario de atencion y calificacion</mat-card-subtitle
+      > -->
+    </div>
+    <div class="col-lg-6 col-6 p-2 card__img--container">
+      <img alt="negocio" class="card__img" [defaultImage]="spinner"
+      [lazyLoad]="offer.photo" />
+    </div>
+    <div class="col-lg-6 col-6">
+      <div class="card-body">
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip>{{ offer.total | currency }}</mat-chip>
+          <mat-chip color="accent" selected [routerLink]="[offer.offerId]"
+            >VER</mat-chip
+          >
+        </mat-chip-list>
+      </div>
+    </div>
+  </div>
+</mat-card>

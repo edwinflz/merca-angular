@@ -9,6 +9,7 @@ import { environment } from '../../../../environments/environment';
 import { SaveOrder } from '@core/models/order-save.interface';
 import { OrderShopper } from '@core/models/orders-shopper.interface';
 import { TokenService } from '../tokens/token.service';
+import { OrderDetailShopper } from '@core/models/order-detail-shopper.interface';
 
 
 @Injectable({
@@ -16,16 +17,22 @@ import { TokenService } from '../tokens/token.service';
 })
 export class OrderService {
 
-  private url = `${environment.url_api}/api/solicitudes`;
+  private url = `${environment.url_api}/api/orders`;
 
   constructor(
     private http: HttpClient,
     private tokenService: TokenService
   ) { }
 
-  getOrdersToShopper(status: number): Observable<OrderShopper[]> {
-    return this.http.get(`${this.url}/comprador/${this.tokenService.getUser()}/${status}`).pipe(
+  getOrdersToShopper(): Observable<OrderShopper[]> {
+    return this.http.get(`${this.url}/${this.tokenService.getUser()}/shopper`).pipe(
       map((response: any) => response.data as OrderShopper[])
+    );
+  }
+
+  getOrderDetailShopper(id: number): Observable<OrderDetailShopper> {
+    return this.http.get(`${this.url}/${id}/detail`).pipe(
+      map((response: any) => response.data as OrderDetailShopper)
     );
   }
 

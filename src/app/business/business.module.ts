@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LayoutModule } from '@angular/cdk/layout';
 
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
@@ -16,6 +17,7 @@ import { LayoutComponent } from './layout/layout.component';
     BusinessRoutingModule,
     RouterModule,
     MaterialModule,
+    LayoutModule
   ]
 })
 export class BusinessModule { }

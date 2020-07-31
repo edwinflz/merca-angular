@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 import { Category } from '@core/models/categories.interface';
 import { SubCategory } from '@core/models/subcategories.interface';
@@ -17,6 +18,31 @@ export class ListSubcategoriesComponent implements OnInit {
   categories: Category[] = [];
   subcategory: SubCategory;
   spinner = 'assets/img/spinner.gif';
+
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 4
+      },
+      400: {
+        items: 4
+      },
+      740: {
+        items: 5
+      },
+      940: {
+        items: 6
+      }
+    },
+    nav: true
+  }
 
   constructor(
     private subcategoryService: SubcategoryService,

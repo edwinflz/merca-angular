@@ -1,0 +1,17 @@
+<div class="container mt-3 mb-5 pb-5">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-12">
+      <mat-card>
+        <mat-card-title>Registra tú negocio</mat-card-title>
+        <mat-card-content>
+          <app-profile *ngIf="!profile"></app-profile>
+          <app-create-profile
+            *ngIf="profile"
+            [municipalities]="municipalities"
+            [categories]="categories"
+          ></app-create-profile>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

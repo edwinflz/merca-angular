@@ -1,0 +1,74 @@
+<div class="container mt-4 mb-4">
+  <div class="row">
+    <div class="col-12">
+      <mat-card>
+        <div class="row">
+          <div class="col-6">
+            <span class="badge badge-success btn btn-block">TIENE</span>
+          </div>
+          <div class="col-6">
+            <span class="badge badge-danger btn btn-block">NO TIENE</span>
+          </div>
+        </div>
+        <div class="row mt-3" *ngIf="offerDetail">
+          <div class="col-12 text-center">
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="showPriceTable()"
+              *ngIf="offerDetail.visibilityPrice == 1"
+            >
+              VER PRECIO
+            </button>
+          </div>
+        </div>
+        <div class="row" *ngIf="offerDetail">
+          <div class="col-12 mt-2 mb-2 rounded pt-3 pb-3">
+            <mat-card>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Detalle</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let detail of offerDetail.details;
+                      let index = index
+                    "
+                    [className]="
+                      detail.price ? 'table-success' : 'table-danger'
+                    "
+                    class="text-center"
+                  >
+                    <th scope="row">{{ index + 1 }}</th>
+                    <td>
+                      {{ detail.product }} x {{ detail.amount }}
+                      {{ detail.measure }} {{ detail.brand }}
+                      <small *ngIf="showPrice">{{
+                        detail.price | currency
+                      }}</small>
+                    </td>
+                  </tr>
+                  <tr class="text-center">
+                    <td colspan="2">
+                      Total: {{ offerDetail.total | currency }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </mat-card>
+          </div>
+          <div class="col-6">
+            <button mat-raised-button color="primary">ME INTERESA</button>
+          </div>
+          <div class="col-6">
+            <button mat-raised-button color="warn">NO ME INTERESA</button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

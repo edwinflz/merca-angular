@@ -11,7 +11,7 @@ import { Municipality } from '../../models/municipalities.interface';
 })
 export class MunicipalityService {
 
-  private url = `${environment.url_api}/api/municipios`;
+  private url = `${environment.url_api}/api/municipalities`;
 
   constructor(private http: HttpClient) { }
 

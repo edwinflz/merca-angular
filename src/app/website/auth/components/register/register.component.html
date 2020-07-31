@@ -1,0 +1,80 @@
+<form [formGroup]="form">
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Nombre completo*</mat-label>
+    <input
+      matInput
+      type="text"
+      id="name"
+      formControlName="name"
+      placeholder="Nombre completo"
+    />
+    <mat-icon matSuffix>account_circle</mat-icon>
+    <mat-error *ngIf="nameField.errors && nameField.dirty">
+      <p *ngIf="nameField.hasError('required')">
+        Este campo es requerido.
+      </p>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Correo Electrónico*</mat-label>
+    <input
+      matInput
+      type="email"
+      id="email"
+      formControlName="email"
+      placeholder="Email"
+    />
+    <mat-icon matSuffix>drafts</mat-icon>
+    <mat-error *ngIf="emailField.errors && emailField.dirty">
+      <p *ngIf="emailField.hasError('email')">
+        Ingrese un correo válido.
+      </p>
+      <p *ngIf="emailField.hasError('required')">
+        Este campo es requerido.
+      </p>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Contraseña*</mat-label>
+    <input matInput type="password" formControlName="password" id="password" />
+    <mat-icon matSuffix>https</mat-icon>
+    <mat-error *ngIf="passwordField.errors && passwordField.dirty">
+      <p *ngIf="passwordField.hasError('minlength')">
+        Este campo requiere de mínimo 6 carácteres.
+      </p>
+      <p *ngIf="passwordField.hasError('required')">
+        Este campo es requerido.
+      </p>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Repetir Contraseña*</mat-label>
+    <input
+      matInput
+      type="password"
+      formControlName="repeatPassword"
+      id="repeatPassword"
+    />
+    <mat-icon matSuffix>https</mat-icon>
+    <mat-error *ngIf="repeatPasswordField.errors && repeatPasswordField.dirty">
+      <p *ngIf="repeatPasswordField.hasError('mustMatch')">
+        La contraseña no coincide.
+      </p>
+      <p *ngIf="repeatPasswordField.hasError('required')">
+        Este campo es requerido.
+      </p>
+    </mat-error>
+  </mat-form-field>
+
+  <button
+    [disabled]="form.invalid"
+    (click)="sendRequest()"
+    mat-raised-button
+    matRipple
+    class="btn-block mt-2 bg-green1-dark"
+  >
+    CREAR CUENTA
+  </button>
+</form>

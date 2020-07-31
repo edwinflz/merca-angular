@@ -3,20 +3,21 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '../material/material.module';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [SpinnerComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule
   ],
   exports: [
     ReactiveFormsModule,
     MaterialModule,
-    NgxSkeletonLoaderModule,
-    LazyLoadImageModule
+    LazyLoadImageModule,
+    SpinnerComponent
   ]
 })
 export class SharedModule { }

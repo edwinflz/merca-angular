@@ -115,7 +115,7 @@ export class CreateOrderComponent implements OnInit {
   processResult(result): void {
     if (result.exito) {
       this.showMessage('Genial', result.exito);
-      this.router.navigate(['website/shopper/order']);
+      this.router.navigate(['shopper/order']);
     } else {
       this.showMessage('Algo Ocurrio', result.error);
     }

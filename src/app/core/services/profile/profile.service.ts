@@ -9,7 +9,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class ProfileService {
 
-  private url = `${environment.url_api}/api/compradores`;
+  private url = `${environment.url_api}/api/shoppers`;
 
 
   constructor(
@@ -20,5 +20,7 @@ export class ProfileService {
   userHasProfileShopper() {
     return this.http.get(`${this.url}/${this.tokenService.getUser()}`);
   }
+
+ 
 
 }

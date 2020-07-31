@@ -1,9 +1,6 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Listado de tú pedido</mat-card-title>
-  </mat-card-header>
+<mat-card class="shadow">
   <mat-card-content>
-    <table class="table table-striped">
+    <table class="table table-striped mat-elevation-z8">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -36,8 +33,7 @@
     </table>
     <button
       mat-raised-button
-      color="primary"
-      class="btn-block mt-2"
+      class="btn-block bg-green1-dark mt-2"
       (click)="confirmOrder()"
       [disabled]="detail.length === 0"
     >

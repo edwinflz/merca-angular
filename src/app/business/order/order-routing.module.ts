@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ListOrderComponent } from './list-order/list-order.component';
-import { CreateOfferComponent } from './create-offer/create-offer.component';
+import { ListOrderComponent } from './container/list-order/list-order.component';
+import { CreateOfferComponent } from './container/create-offer/create-offer.component';
 
 
 const routes: Routes = [

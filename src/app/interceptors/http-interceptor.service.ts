@@ -19,7 +19,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         .set('Content-Type', 'application/json')
     });
 
-    request = this.addUser(request);
+    request = this.addToken(request);
 
     return next.handle(request)
       .pipe(
@@ -29,12 +29,12 @@ export class HttpInterceptorService implements HttpInterceptor {
   }
 
   // tslint:disable-next-line: typedef
-  private addUser(req: HttpRequest<any>) {
-    const user = this.tokenService.getUser();
-    if (user) {
+  private addToken(req: HttpRequest<any>) {
+    const token = this.tokenService.getToken();
+    if (token) {
       req = req.clone({
         setHeaders: {
-          user,
+          Authorization: token
         }
       });
       return req;

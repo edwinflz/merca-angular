@@ -1,6 +1,6 @@
 export interface SubCategory {
     id: number;
-    nombre_subcategoria: string;
-    descripcion: string;
-    imagen: string;
+    nameSubcategory: string;
+    description: string;
+    img: string;
 }

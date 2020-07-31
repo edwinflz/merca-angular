@@ -17,9 +17,10 @@
           {{ option }}</mat-option
         >
       </mat-select>
-      <mat-error *ngIf="paymentField.hasError('required')">Este campo es requerido.</mat-error>
+      <mat-error *ngIf="paymentField.hasError('required')"
+        >Este campo es requerido.</mat-error
+      >
     </mat-form-field>
-   
   </form>
 </div>
 <div mat-dialog-actions>

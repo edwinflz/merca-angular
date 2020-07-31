@@ -12,11 +12,11 @@ export class ListStoreComponent implements OnInit {
     lng: -75.379927,
   };
   zoom = 15;
-  display?: google.maps.LatLngLiteral;
-  options: google.maps.MapOptions = {
-    disableDefaultUI: true,
-    fullscreenControl: false
-  };
+  // display?: google.maps.LatLngLiteral;
+  // options: google.maps.MapOptions = {
+  //   disableDefaultUI: true,
+  //   fullscreenControl: false
+  // };
 
   constructor() { }
 

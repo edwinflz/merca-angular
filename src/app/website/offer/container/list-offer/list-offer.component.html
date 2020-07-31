@@ -1,0 +1,23 @@
+<div
+  [ngStyle]="{ height: offers.length == 0 ? '100vh' : '' }"
+  class="container h-100 mt-4 mb-5 overflow-hidden"
+>
+  <app-spinner *ngIf="offers.length == 0" [spinner]="true"></app-spinner>
+
+  <div class="row" *ngIf="offers.length != 0">
+    <div class="col-12 mb-2 mt-2">
+      <mat-card class="rounded-lg p-2 bg-purple">
+        <h1 class="text-center separate">Revisa tús ofertas!</h1>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="row p-2" *ngIf="offers.length != 0">
+    <div
+      class="col-12 col-md-6 col-lg-6"
+      *ngFor="let offer of offers; let index = index"
+    >
+      <app-card-offer [offer]="offer" [index]="index"></app-card-offer>
+    </div>
+  </div>
+</div>

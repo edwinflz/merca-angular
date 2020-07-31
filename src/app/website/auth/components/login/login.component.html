@@ -1,0 +1,28 @@
+<form [formGroup]="form">
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Usuario*</mat-label>
+    <input
+      matInput
+      type="email"
+      id="email"
+      formControlName="email"
+      placeholder="Email"
+    />
+    <mat-icon matSuffix>account_box</mat-icon>
+  </mat-form-field>
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Password*</mat-label>
+    <input matInput type="password" formControlName="password" id="password" />
+    <mat-icon matSuffix>https</mat-icon>
+  </mat-form-field>
+
+  <button
+    [disabled]="form.invalid"
+    (click)="sendRequest()"
+    mat-raised-button
+    matRipple
+    class="btn-block mt-2 bg-green1-dark"
+  >
+    INICIAR SESION
+  </button>
+</form>

@@ -1,0 +1,55 @@
+<div class="container-fluid h-100">
+  <div
+    class="row h-100 justify-content-center align-items-center background__image"
+    *ngIf="!spinner"
+  >
+    <div class="col-md-6 col-lg-6 ml-auto mr-auto">
+      <mat-card class="rounded shadow-sm">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="text-center mb-0 font-28">Bienvenido</h1>
+            <p
+              class="text-center mt-0 font-weight-bold font-14 color-highlight"
+            >
+              Vamos a iniciar sesión!
+            </p>
+          </div>
+        </div>
+
+        <mat-card-content>
+          <app-login (sendUser)="loginApi($event)" *ngIf="login"></app-login>
+          <app-register (sendUser)="registerUser($event)" *ngIf="!login"></app-register>
+        </mat-card-content>
+
+        <mat-card-actions class="text-center">
+          <div class="row">
+            <div class="col-12 col-lg-6" *ngIf="!login">
+              <button
+                mat-button
+                class="font-green1-dark btn-block"
+                (click)="login = true"
+              >
+                ¿Ya estás registrado?
+              </button>
+            </div>
+            <div class="col-12 col-lg-6" *ngIf="login">
+              <button
+                mat-button
+                class="font-green1-dark btn-block"
+                (click)="login = false"
+              >
+                Crea una cuenta!
+              </button>
+            </div>
+            <div class="col-12 col-lg-6">
+              <button mat-button class="font-green1-dark btn-block">
+                ¿Se te olvidó tu contraseña?
+              </button>
+            </div>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <app-spinner [spinner]="spinner"></app-spinner>
+</div>

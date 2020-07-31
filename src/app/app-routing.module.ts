@@ -1,24 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/website',
-    pathMatch: 'full',
-  },
-  {
-    path: 'website',
     loadChildren: () => import('./website/website.module').then(m => m.WebsiteModule)
   },
   {
     path: 'business',
     loadChildren: () => import('./business/business.module').then(m => m.BusinessModule)
-  }
+  },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
