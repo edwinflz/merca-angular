@@ -16,7 +16,6 @@ export class HttpInterceptorService implements HttpInterceptor {
 
     let request = req.clone({
       headers: req.headers.set('Accept', 'application/json')
-        .set('Content-Type', 'application/json')
     });
 
     request = this.addToken(request);

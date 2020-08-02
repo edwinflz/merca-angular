@@ -1,11 +1,10 @@
 <!-- <app-list-store></app-list-store> -->
 
 <div
-  [ngStyle]="{ height: categories.length === 0 ? '100vh' : '' }"
   class="container-fluid p-4 bg-white rounded-lg shadow overflow-hidden mb-5"
 >
-  <app-spinner *ngIf="categories.length == 0" [spinner]="true"></app-spinner>
- 
+  <!-- <app-spinner *ngIf="categories.length == 0" [spinner]="true"></app-spinner> -->
+
   <div class="row" *ngFor="let category of categories">
     <div class="col-12 mb-2 mt-2">
       <mat-card class="rounded-lg p-2 bg-purple">

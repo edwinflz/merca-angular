@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { TokenService } from '../tokens/token.service';
 import { environment } from '../../../../environments/environment';
 import { tap } from 'rxjs/operators';
-import { stringify } from '@angular/compiler/src/util';
+import { User } from '@core/models/user.interface';
 
 
 @Injectable({
@@ -12,6 +12,7 @@ import { stringify } from '@angular/compiler/src/util';
 export class AuthService {
 
   private url = `${environment.url_api}/api/users`;
+  user: User;
 
   constructor(
     private http: HttpClient,
@@ -20,16 +21,14 @@ export class AuthService {
 
 
   loginRestApi(email: string, password: string) {
-    return this.http.post(this.url, {
-      email,
-      password
-    })
+    return this.http.post(this.url, { email, password })
       .pipe(
-        tap((data: { error: string, token: string, status: number, user: string }) => {
+        tap((data: { error: string, token: string, status: number, user: User }) => {
           if (data.token) {
             const user = data.user;
             const tokens = data.token;
-            this.token.saveUser(user);
+            this.token.saveUser(user.sub);
+            this.token.saveName(user.name);
             this.token.saveToken(tokens);
           }
         })
@@ -41,14 +40,12 @@ export class AuthService {
       name,
       email,
       password
-    }).pipe(
-      tap((data: { error: string, token: string, status: number, user: string }) => {
-        if (data.token) {
-          const user = data.user;
-          this.token.saveUser(user);
-        }
-      })
-    );
+    });
+  }
+
+
+  logout(): void {
+    this.token.removeItems();
   }
 }
 

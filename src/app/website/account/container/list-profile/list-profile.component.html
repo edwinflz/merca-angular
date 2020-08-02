@@ -1,10 +1,18 @@
-<div class="container h-100 mt-3 mb-5 pb-5">
-  <div class="row h-100 justify-content-center align-items-center">
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12 mb-2 mt-2">
+      <mat-card class="rounded-lg p-2 bg-purple">
+        <h1 class="text-center separate">Por favor termina de registrar tú perfil!</h1>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="row justify-content-center align-items-center">
     <div class="col-12">
       <mat-card>
         <mat-card-content>
           <app-profile *ngIf="!profile"></app-profile>
-          <app-create-profile *ngIf="profile" [municipalities]="municipalities"></app-create-profile>
+          <app-create-profile *ngIf="profile" [municipalities]="municipalities" [user]="user"></app-create-profile>
         </mat-card-content>
         <mat-card-actions class="text-center">
           <button
@@ -22,3 +30,12 @@
     </div>
   </div>
 </div>
+
+
+<ngx-spinner
+  bdColor="rgba(140,193,82,0.8)"
+  color="#fff"
+  type="ball-clip-rotate-multiple"
+>
+  <p class="loading">Cargando...</p>
+</ngx-spinner>

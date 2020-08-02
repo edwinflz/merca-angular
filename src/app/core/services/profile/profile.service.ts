@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { TokenService } from '../tokens/token.service';
 import { environment } from '../../../../environments/environment';
@@ -21,6 +21,10 @@ export class ProfileService {
     return this.http.get(`${this.url}/${this.tokenService.getUser()}`);
   }
 
- 
+  createShopper(shopper) {
+    return this.http.post(this.url, shopper);
+  }
+
+
 
 }

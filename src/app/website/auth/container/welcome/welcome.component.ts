@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Params, ActivatedRoute, Router } from '@angular/router';
 
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { MessageServer } from '@core/models/message-server.interface';
 import { AuthService } from '@core/services/auth/auth.service';
 import { ProfileService } from '@core/services/profile/profile.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-welcome',
@@ -17,65 +13,71 @@ import { ProfileService } from '@core/services/profile/profile.service';
 })
 export class WelcomeComponent implements OnInit {
 
-  spinner: boolean;
   login: boolean;
-
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-
+  registerSuccess: boolean;
+  loginSuccess: boolean;
+  errors: string[] = [];
 
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private auth: AuthService,
     private profileService: ProfileService,
-    private snackBar: MatSnackBar,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
     this.login = true;
-    this.spinner = false;
+    this.registerSuccess = false;
+    this.loginSuccess = false;
+    this.logout();
   }
 
   loginApi({ email, password }): void {
-    this.spinner = true;
+    this.spinner.show();
+    this.errors.length = 0;
     this.auth.loginRestApi(email, password)
       .subscribe(data => {
-        this.spinner = false;
+        this.spinner.hide();
         if (data.status === 404) {
-          this.showError(data.error);
+          this.pushError(data.error);
         } else {
+          this.loginSuccess = true;
           this.redirectLogin();
         }
       }, error => {
-        this.spinner = false;
+        this.spinner.hide();
+        this.processError(error);
       });
   }
 
   registerUser({ name, email, password }): void {
-    this.spinner = true;
+    this.spinner.show();
+    this.errors.length = 0;
     this.auth.registerRestApi(name, email, password)
-      .subscribe(data => {
-        this.spinner = false;
+      .subscribe((data: MessageServer) => {
+        this.spinner.hide();
         if (data.status === 404) {
-          this.showError(data.error);
+          this.pushError(data.error);
         } else {
-          // this.redirectLogin();
-          console.log('registro exitoso');
+          this.registerSuccess = true;
         }
       }, error => {
-        this.spinner = false;
+        this.spinner.hide();
         this.processError(error);
       });
   }
 
 
   processError(error): void {
+    this.loginSuccess = false;
+
     if (error.status === 422) {
       this.destructuringError(error);
     }
 
     if (error.status === 500) {
-      this.showMessage('Oops!', 'Ocurrio un Error inesperado con el servidor!');
+      this.pushError('Error inesperado con el servidor, por favor vuelva a intentar!');
     }
   }
 
@@ -84,34 +86,41 @@ export class WelcomeComponent implements OnInit {
 
     for (const property in validationErrors) {
       if (validationErrors.hasOwnProperty(property)) {
-        this.showMessage('Oops!', validationErrors[property]);
+        this.pushError(validationErrors[property]);
       }
     }
-  }
 
-  showMessage(first: string, second: string): void {
-    this.snackBar.open(first, second, {
-      duration: 1500,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
   }
 
   redirectLogin(): void {
     this.profileService.userHasProfileShopper().subscribe((data: any) => {
+      this.loginSuccess = false;
       if (data.status === 404) {
         this.router.navigate(['shopper/account']);
       } else {
         this.router.navigate(['shopper/home']);
       }
+    }, error => {
+      this.processError(error);
     });
   }
 
-  showError(msg: string): void {
-    this.snackBar.open('Error!', msg, {
-      duration: 2000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
+  pushError(msg: string): void {
+    this.errors.push(msg);
+  }
+
+  registerChange(): void {
+    this.login = true;
+    this.registerSuccess = false;
+  }
+
+  logout(): void {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      const logout = +params.sure;
+      if (logout === 1) {
+          this.auth.logout();
+          this.router.navigate(['/']);
+      }
     });
   }
 

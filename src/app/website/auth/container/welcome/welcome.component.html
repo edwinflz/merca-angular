@@ -1,7 +1,6 @@
 <div class="container-fluid h-100">
   <div
     class="row h-100 justify-content-center align-items-center background__image"
-    *ngIf="!spinner"
   >
     <div class="col-md-6 col-lg-6 ml-auto mr-auto">
       <mat-card class="rounded shadow-sm">
@@ -17,8 +16,29 @@
         </div>
 
         <mat-card-content>
+          <div class="alert alert-success" role="alert" *ngIf="registerSuccess">
+            Registro exitoso!.
+            <a (click)="registerChange()" class="alert-link"
+              >Inicia sesión aquí!</a
+            >
+          </div>
+          <div class="alert alert-success" role="alert" *ngIf="loginSuccess">
+            Genia! serás redirigido en unos segundos.
+          </div>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="errors.length != 0"
+          >
+            <p *ngFor="let error of errors">
+              <strong>- {{ error }} </strong>
+            </p>
+          </div>
           <app-login (sendUser)="loginApi($event)" *ngIf="login"></app-login>
-          <app-register (sendUser)="registerUser($event)" *ngIf="!login"></app-register>
+          <app-register
+            (sendUser)="registerUser($event)"
+            *ngIf="!login"
+          ></app-register>
         </mat-card-content>
 
         <mat-card-actions class="text-center">
@@ -51,5 +71,12 @@
       </mat-card>
     </div>
   </div>
-  <app-spinner [spinner]="spinner"></app-spinner>
 </div>
+
+<ngx-spinner
+  bdColor="rgba(140,193,82,0.8)"
+  color="#fff"
+  type="ball-clip-rotate-multiple"
+>
+  <p class="loading">Cargando...</p>
+</ngx-spinner>

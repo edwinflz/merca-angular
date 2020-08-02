@@ -61,11 +61,8 @@
       formControlName="profile"
       placeholder="Subir Foto"
       valuePlaceholder="No ha Selecciona una foto"
-      required
+      accept="image/*"
     ></ngx-mat-file-input>
-    <mat-error *ngIf="profileField.hasError('required')">
-      Por Favor Selecciona una foto
-    </mat-error>
     <mat-error *ngIf="profileField.hasError('maxContentSize')">
       El tamaño total no debe exceder a
       {{ profileField.getError("maxContentSize").maxSize | byteFormat }} ({{
@@ -81,4 +78,13 @@
       <mat-icon>clear</mat-icon>
     </button>
   </mat-form-field>
+
+  <button
+    mat-raised-button
+    class="btn-block bg-green1-dark mt-2"
+    (click)="saveShopper($event)"
+    [disabled]="form.invalid"
+  >
+    Guardar perfil
+  </button>
 </form>

@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: WelcomeComponent
+  },
+  {
+    path: 'logout/:sure',
+    component: WelcomeComponent
   }
 ];
 

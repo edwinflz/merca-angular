@@ -27,6 +27,7 @@
     "ng-lazyload-image": "^8.0.1",
     "ngx-material-file-input": "2.1.1",
     "ngx-owl-carousel-o": "^4.0.0",
+    "ngx-spinner": "^10.0.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

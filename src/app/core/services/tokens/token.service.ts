@@ -15,6 +15,10 @@ export class TokenService {
     localStorage.setItem('user', user);
   }
 
+  saveName(name: string): void {
+    localStorage.setItem('name', name);
+  }
+
   getToken(): string {
     return localStorage.getItem('token');
   }
@@ -22,4 +26,16 @@ export class TokenService {
   getUser(): string {
     return localStorage.getItem('user');
   }
+
+  getName(): string {
+    return localStorage.getItem('name');
+  }
+
+  removeItems(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('name');
+  }
+
+
 }
