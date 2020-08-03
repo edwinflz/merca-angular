@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Municipality } from '@core/models/municipalities.interface';
-import { FileValidator, FileInput } from 'ngx-material-file-input';
-import { ProfileService } from '@core/services/profile/profile.service';
+import { FileValidator } from 'ngx-material-file-input';
 
 @Component({
   selector: 'app-create-profile',
@@ -14,12 +13,12 @@ export class CreateProfileComponent implements OnInit {
   form: FormGroup;
   @Input() municipalities: Municipality[];
   @Input() user: string;
+  @Output() sendFormData: EventEmitter<any> = new EventEmitter();
   readonly maxSize = 100000;
 
 
   constructor(
     private formBuilder: FormBuilder,
-    private profileService: ProfileService
   ) { }
 
   ngOnInit(): void {
@@ -57,7 +56,7 @@ export class CreateProfileComponent implements OnInit {
     });
   }
 
-  saveShopper(event: Event): void {
+  sendDataShopper(event: Event): void {
     event.preventDefault();
     const formData = new FormData();
 
@@ -70,10 +69,11 @@ export class CreateProfileComponent implements OnInit {
     formData.append('profile', fileForm.files[0]);
     formData.append('userId', this.user);
 
+
     if (this.form.valid) {
-      this.profileService.createShopper(formData).subscribe(data => console.log(data), error => console.log(error));
+      this.sendFormData.emit(formData);
     }
-    
+
   }
 
 

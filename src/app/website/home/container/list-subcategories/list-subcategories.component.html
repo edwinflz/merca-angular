@@ -1,15 +1,7 @@
-<!-- <app-list-store></app-list-store> -->
-
-<div
-  class="container-fluid p-4 bg-white rounded-lg shadow overflow-hidden mb-5"
->
-  <!-- <app-spinner *ngIf="categories.length == 0" [spinner]="true"></app-spinner> -->
-
+<section class="container mb-5 pb-5">
   <div class="row" *ngFor="let category of categories">
     <div class="col-12 mb-2 mt-2">
-      <mat-card class="rounded-lg p-2 bg-purple">
-        <h1 class="text-center separate">{{ category.name }}</h1>
-      </mat-card>
+      <mat-card-title>{{ category.name }}</mat-card-title>
     </div>
 
     <div class="col-12">
@@ -30,4 +22,13 @@
       </owl-carousel-o>
     </div>
   </div>
-</div>
+
+  <ngx-spinner
+    bdColor="rgba(0,25,92,0.8)"
+    color="#fff"
+    type="ball-clip-rotate-multiple"
+    zIndex="50"
+  >
+    <p class="loading">Cargando categorias...</p>
+  </ngx-spinner>
+</section>

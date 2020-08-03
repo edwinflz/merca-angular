@@ -25,6 +25,10 @@ export class ProfileService {
     return this.http.post(this.url, shopper);
   }
 
+  getUrlImage(filename: string): string {
+    return `${this.url}/avatar/${filename}`;
+  }
+
 
 
 }

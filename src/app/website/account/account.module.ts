@@ -7,9 +7,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CreateProfileComponent } from './components/create-profile/create-profile.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 @NgModule({
-  declarations: [ListProfileComponent, ProfileComponent, CreateProfileComponent],
+  declarations: [ListProfileComponent, ProfileComponent, CreateProfileComponent, EditProfileComponent],
   imports: [
     CommonModule,
     AccountRoutingModule,

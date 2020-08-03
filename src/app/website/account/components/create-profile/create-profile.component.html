@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="saveShopper($event)">
+<form [formGroup]="form" (ngSubmit)="sendDataShopper($event)">
   <mat-form-field class="w-100" appearance="fill">
     <mat-label>Municipio*</mat-label>
     <mat-select formControlName="municipality" id="municipality">
@@ -82,7 +82,7 @@
   <button
     mat-raised-button
     class="btn-block bg-green1-dark mt-2"
-    (click)="saveShopper($event)"
+    (click)="sendDataShopper($event)"
     [disabled]="form.invalid"
   >
     Guardar perfil

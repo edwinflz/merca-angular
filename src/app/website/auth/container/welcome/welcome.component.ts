@@ -13,6 +13,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class WelcomeComponent implements OnInit {
 
+  showLogin: boolean;
   login: boolean;
   registerSuccess: boolean;
   loginSuccess: boolean;
@@ -27,7 +28,7 @@ export class WelcomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.login = true;
+    this.showLogin = false;
     this.registerSuccess = false;
     this.loginSuccess = false;
     this.logout();
@@ -118,10 +119,21 @@ export class WelcomeComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       const logout = +params.sure;
       if (logout === 1) {
-          this.auth.logout();
-          this.router.navigate(['/']);
+        this.auth.logout();
+        this.router.navigate(['/']);
       }
     });
+  }
+
+  showFormLogin(): void {
+    this.showLogin = true;
+    this.login = true;
+  }
+
+
+  showFormRegister(): void {
+    this.showLogin = true;
+    this.login = false;
   }
 
 }

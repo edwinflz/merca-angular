@@ -7,6 +7,7 @@ import { SubCategory } from '@core/models/subcategories.interface';
 
 import { DialogSubcategoriesComponent } from '../dialog-subcategories/dialog-subcategories.component';
 import { SubcategoryService } from '@core/services/subcategory/subcategory.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-list-subcategories',
@@ -46,7 +47,8 @@ export class ListSubcategoriesComponent implements OnInit {
 
   constructor(
     private subcategoryService: SubcategoryService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private load: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
@@ -54,7 +56,9 @@ export class ListSubcategoriesComponent implements OnInit {
   }
 
   fetchCategories(): void {
+    this.load.show();
     this.subcategoryService.getAllCategories().subscribe(categories => {
+      this.load.hide();
       this.categories = categories;
     });
   }

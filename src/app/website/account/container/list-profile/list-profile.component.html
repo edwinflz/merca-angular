@@ -1,8 +1,10 @@
-<div class="container mt-3">
+<div class="container mt-3 mb-5 pb-5">
   <div class="row">
     <div class="col-12 mb-2 mt-2">
       <mat-card class="rounded-lg p-2 bg-purple">
-        <h1 class="text-center separate">Por favor termina de registrar tú perfil!</h1>
+        <h1 class="text-center separate">
+          Por favor termina de registrar tú perfil!
+        </h1>
       </mat-card>
     </div>
   </div>
@@ -11,26 +13,41 @@
     <div class="col-12">
       <mat-card>
         <mat-card-content>
-          <app-profile *ngIf="!profile"></app-profile>
-          <app-create-profile *ngIf="profile" [municipalities]="municipalities" [user]="user"></app-create-profile>
-        </mat-card-content>
-        <mat-card-actions class="text-center">
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="profile = !profile"
+          <div class="alert alert-success" role="alert" *ngIf="shopperSuccess">
+            {{ success }}
+          </div>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="errors.length != 0"
           >
+            <p *ngFor="let error of errors">
+              <strong>- {{ error }} </strong>
+            </p>
+          </div>
+          <app-profile
+            [shopper]="infoShopper"
+            *ngIf="!profile"
+          ></app-profile>
+          <app-create-profile
+            *ngIf="profile"
+            (sendFormData)="saveShopper($event)"
+            [municipalities]="municipalities"
+            [user]="user"
+          ></app-create-profile>
+        </mat-card-content>
+        <!-- <mat-card-actions class="text-center" *ngIf="!profile">
+          <button mat-raised-button color="primary" (click)="showProfile()">
             VER PERFIL
           </button>
-          <button mat-raised-button color="accent" (click)="profile = !profile">
+          <button mat-raised-button color="accent" (click)="showEditProfile()">
             EDITAR PERFIL
           </button>
-        </mat-card-actions>
+        </mat-card-actions> -->
       </mat-card>
     </div>
   </div>
 </div>
-
 
 <ngx-spinner
   bdColor="rgba(140,193,82,0.8)"

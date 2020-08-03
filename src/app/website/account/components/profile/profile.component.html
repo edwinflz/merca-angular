@@ -1,1 +1,21 @@
-<p>profile works!</p>
+<mat-card>
+  <mat-card-content>
+    <div class="image">
+      <img
+        [alt]="shopper.perfil"
+        [defaultImage]="spinner"
+        [lazyLoad]="url"
+        class="img-fluid"
+      />
+    </div>
+    <mat-list role="list">
+      <mat-list-item role="listitem"
+        >Domicilio principal: {{ shopper.domicilio }}</mat-list-item
+      >
+      <mat-list-item role="listitem"
+        >Domicilios opcionales: {{ shopper.domicilio_dos }} -
+        {{ shopper.domicilio_tres }}</mat-list-item
+      >
+    </mat-list>
+  </mat-card-content>
+</mat-card>

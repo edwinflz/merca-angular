@@ -1,12 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  /*------ Colores */
+  /*----Principales */
+  --white-color: #fff;
+  --black-color: #333;
+  --primary-color: #00195c;
+  --second-color: #253cc0;
+  --third-color: #4a89dc;
+  /* ------- Tipografia */
+  --fuente-lato: 'Lato', sans-serif;
+  --fuente-oswald: 'Oswald', sans-serif;
+}
+
 html,
 body {
   height: 100%;
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: var(--fuente-oswald);
 }
 
 button:focus {
@@ -60,14 +73,18 @@ button:focus {
   color: #4a89dc !important;
 }
 
-.bg-purple {
-  background-color: #8752c1;
-  color: white;
+.bg-third-color {
+  background-color: var(--second-color);
+  color: var(--white-color)
 }
 
-.bg-green1-dark {
-  background-color: #8cc152;
-  color: #ffffff;
+.bg-primary-color {
+  background-color: var(--primary-color);
+  color: var(--white-color)
+}
+
+.font-blue-dark {
+  color: var(--third-color);
 }
 
 .loading{
