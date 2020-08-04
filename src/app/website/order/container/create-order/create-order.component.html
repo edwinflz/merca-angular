@@ -1,14 +1,21 @@
-<div class="container mt-2" *ngIf="!spinner">
+<div class="container mt-2">
   <div class="row">
     <div class="col-12 mb-2 mt-2">
-      <mat-card class="rounded-lg p-2 bg-purple">
-        <h1 class="text-center separate">Registra y envia tú pedido!</h1>
-      </mat-card>
+      <mat-card-title>Registra y envia tú pedido!</mat-card-title>
     </div>
   </div>
+
   <div class="row">
     <div class="col-12">
       <mat-card class="rounded">
+        <div class="alert alert-success" role="alert" *ngIf="addProduct">
+          Bien acabas de agregar un producto!.
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="errors.length != 0">
+          <p *ngFor="let error of errors">
+            <strong>- {{ error }} </strong>
+          </p>
+        </div>
         <mat-card-content>
           <app-form-order
             (sendDetail)="receivedDetail($event)"
@@ -19,16 +26,23 @@
   </div>
 </div>
 
-<div class="container mt-2 mb-4 pb-4" *ngIf="!spinner">
+<div class="container mt-2 mb-5 pb-5">
   <div class="row">
     <div class="col-12 mb-2 mt-2">
-      <mat-card class="rounded-lg p-2 bg-purple">
-        <h1 class="text-center separate">Detalle de tú pedido!</h1>
-      </mat-card>
+      <mat-card-title>Detalle de tú pedido!</mat-card-title>
     </div>
   </div>
+
   <div class="row">
     <div class="col-12">
+      <div class="alert alert-success" role="alert" *ngIf="registerSuccess">
+        Registro exitoso!.
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="errors.length != 0">
+        <p *ngFor="let error of errors">
+          <strong>- {{ error }} </strong>
+        </p>
+      </div>
       <app-table-order
         [detail]="detail"
         (deleteDetail)="deleteDetail($event)"
@@ -38,6 +52,11 @@
   </div>
 </div>
 
-<!-- <div [ngStyle]="{ height: spinner ? '100vh' : '' }" class="container bg-white" *ngIf="spinner">
-  <app-spinner [spinner]="spinner"></app-spinner>
-</div> -->
+<ngx-spinner
+  bdColor="rgba(0,25,92,0.8)"
+  color="#fff"
+  type="ball-clip-rotate-multiple"
+  zIndex="300"
+>
+  <p class="loading">Creando solicitud...</p>
+</ngx-spinner>

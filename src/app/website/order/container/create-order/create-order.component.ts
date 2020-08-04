@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { DetailOrder } from '@core/models/details.interface';
+import { NgxSpinnerService } from 'ngx-spinner';
 
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 
 import { SaveOrder } from '@core/models/order-save.interface';
 import { OrderService } from '@core/services/order/order.service';
 import { TokenService } from '@core/services/tokens/token.service';
+import { MessageServer } from '@core/models/message-server.interface';
 
 @Component({
   selector: 'app-create-order',
@@ -19,12 +16,12 @@ import { TokenService } from '@core/services/tokens/token.service';
 })
 export class CreateOrderComponent implements OnInit {
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   detail: DetailOrder[] = [];
   subcategoryId: string;
-  spinner: boolean;
+  errors: string[] = [];
+  registerSuccess: boolean;
+  addProduct: boolean;
 
 
   constructor(
@@ -32,11 +29,12 @@ export class CreateOrderComponent implements OnInit {
     private tokenService: TokenService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private snackBar: MatSnackBar,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
-    this.spinner = false;
+    this.registerSuccess = false;
+    this.addProduct = false;
     this.trySubcategoryId();
   }
 
@@ -48,7 +46,7 @@ export class CreateOrderComponent implements OnInit {
 
   receivedDetail(detail: DetailOrder): void {
     if (detail) {
-      this.validateAmountDetail() ? this.showMessage('Espera!', 'Alcanzaste el máximo de items del pedido') : this.addDetail(detail);
+      this.validateAmountDetail() ? this.pushError('Espera!, Alcanzaste el máximo de items del pedido') : this.addDetail(detail);
     }
   }
 
@@ -59,11 +57,15 @@ export class CreateOrderComponent implements OnInit {
   addDetail(detail: DetailOrder): void {
     const date = new Date();
     this.detail.push({ ...detail, id: date.getTime() });
-    this.showMessage('Bien!', 'Acabas de agregar un producto');
+    this.addProduct = true;
+    setTimeout(() => {
+      this.addProduct = false;
+    }, 1000);
   }
 
   saveOrder(header): void {
-    this.spinner = true;
+    this.spinner.show();
+    this.errors.length = 0;
     const data: SaveOrder = {
       subcategoryId: this.subcategoryId,
       userId: this.tokenService.getUser(),
@@ -71,26 +73,24 @@ export class CreateOrderComponent implements OnInit {
       details: [...this.detail]
     };
     this.orderService.createOrder(data)
-      .subscribe(result => {
-        this.spinner = false;
-        this.processResult(result);
+      .subscribe((result: MessageServer) => {
+        this.spinner.hide();
+        if (result.status === 404) {
+          this.pushError(result.error);
+        } else {
+          this.registerSuccess = true;
+          this.router.navigate(['shopper/order']);
+        }
       }, error => {
-        this.spinner = false;
+        this.spinner.hide();
         this.processError(error);
       });
   }
 
   validateAmountDetail(): boolean {
-    return this.detail.length === 10;
+    return this.detail.length === 2;
   }
 
-  showMessage(first: string, second: string): void {
-    this.snackBar.open(first, second, {
-      duration: 1500,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
 
   processError(error): void {
     if (error.status === 422) {
@@ -98,7 +98,7 @@ export class CreateOrderComponent implements OnInit {
     }
 
     if (error.status === 500) {
-      this.showMessage('Oops!', 'Ocurrio un Error inesperado con el servidor!');
+      this.pushError('Error inesperado con el servidor, por favor vuelva a intentar!');
     }
   }
 
@@ -107,19 +107,18 @@ export class CreateOrderComponent implements OnInit {
 
     for (const property in validationErrors) {
       if (validationErrors.hasOwnProperty(property)) {
-        this.showMessage('Oops!', validationErrors[property]);
+        this.pushError(validationErrors[property]);
       }
     }
+
   }
 
-  processResult(result): void {
-    if (result.exito) {
-      this.showMessage('Genial', result.exito);
-      this.router.navigate(['shopper/order']);
-    } else {
-      this.showMessage('Algo Ocurrio', result.error);
-    }
+  pushError(msg: string): void {
+    this.errors.push(msg);
   }
+
+
+
 
 
 

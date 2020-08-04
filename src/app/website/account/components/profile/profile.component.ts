@@ -10,7 +10,7 @@ import { ProfileService } from '@core/services/profile/profile.service';
 export class ProfileComponent implements OnInit {
 
   @Input() shopper: Shopper;
-  spinner = 'assets/img/spinner.gif';
+  spinner = 'assets/img/default.jpg';
   url: string;
 
   constructor(private profileService: ProfileService) { }
@@ -19,8 +19,6 @@ export class ProfileComponent implements OnInit {
     if (this.shopper) {
       this.url = this.profileService.getUrlImage(this.shopper.perfil);
     }
-    console.log(this.shopper);
-    console.log(this.url);
   }
 
 }

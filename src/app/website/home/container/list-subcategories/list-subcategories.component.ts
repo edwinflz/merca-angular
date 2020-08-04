@@ -43,7 +43,7 @@ export class ListSubcategoriesComponent implements OnInit {
       }
     },
     nav: true
-  }
+  };
 
   constructor(
     private subcategoryService: SubcategoryService,
@@ -60,7 +60,7 @@ export class ListSubcategoriesComponent implements OnInit {
     this.subcategoryService.getAllCategories().subscribe(categories => {
       this.load.hide();
       this.categories = categories;
-    });
+    }, errors => this.load.hide());
   }
 
   openDialog(sub: SubCategory): void {

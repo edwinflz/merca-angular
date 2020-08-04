@@ -24,20 +24,15 @@
         </div>
         <div class="col-lg-6 col-6">
           <div class="card-body">
-            <mat-chip-list>
-              <mat-chip
-                *ngIf="order.status == 1"
-                class="bg-green1-dark"
-                selected
-                >ACTIVO</mat-chip
-              >
-              <mat-chip *ngIf="order.status == 2" color="primary" selected
-                >FINALIZADO</mat-chip
-              >
-            </mat-chip-list>
+            <span class="badge badge-success" *ngIf="order.status == 1"
+              >ACTIVO</span
+            >
+            <span class="badge badge-primary" *ngIf="order.status == 0"
+              >FINALIZADO</span
+            >
             <button
               mat-raised-button
-              class="btn-block mt-1 bg-purple"
+              class="btn-block mt-1 bg-primary-color"
               (click)="sendRequestOrder(order.id)"
             >
               VER

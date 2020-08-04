@@ -1,17 +1,20 @@
 <div class="container mt-3 mb-5 pb-5">
-  <div class="row">
+  <div class="row"  *ngIf="profile">
     <div class="col-12 mb-2 mt-2">
-      <mat-card class="rounded-lg p-2 bg-purple">
-        <h1 class="text-center separate">
-          Por favor termina de registrar tú perfil!
-        </h1>
-      </mat-card>
+      <mat-card-title>Por favor termina de registrar tú perfil!</mat-card-title>
     </div>
   </div>
 
+  <div class="row"  *ngIf="!profile">
+    <div class="col-12 mb-2 mt-2">
+      <mat-card-title>Mi Perfil!</mat-card-title>
+    </div>
+  </div>
+
+
   <div class="row justify-content-center align-items-center">
     <div class="col-12">
-      <mat-card>
+      <mat-card class="mat-elevation-z8">
         <mat-card-content>
           <div class="alert alert-success" role="alert" *ngIf="shopperSuccess">
             {{ success }}
@@ -25,10 +28,7 @@
               <strong>- {{ error }} </strong>
             </p>
           </div>
-          <app-profile
-            [shopper]="infoShopper"
-            *ngIf="!profile"
-          ></app-profile>
+          <app-profile [shopper]="infoShopper" *ngIf="!profile"></app-profile>
           <app-create-profile
             *ngIf="profile"
             (sendFormData)="saveShopper($event)"
@@ -50,9 +50,10 @@
 </div>
 
 <ngx-spinner
-  bdColor="rgba(140,193,82,0.8)"
+  bdColor="rgba(0,25,92,0.8)"
   color="#fff"
   type="ball-clip-rotate-multiple"
+  zIndex="300"
 >
-  <p class="loading">Cargando...</p>
+  <p class="loading">Cargando perfil...</p>
 </ngx-spinner>

@@ -4,6 +4,7 @@ import { OrderShopper } from '@core/models/orders-shopper.interface';
 import { OrderDetailShopper } from '@core/models/order-detail-shopper.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogListOrderComponent } from '../dialog-list-order/dialog-list-order.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class ListOrderComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private load: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
@@ -26,9 +28,11 @@ export class ListOrderComponent implements OnInit {
   }
 
   fetchOrders(): void {
+    this.load.show();
     this.orderService.getOrdersToShopper().subscribe(orders => {
       this.orders = orders;
-    });
+      this.load.hide();
+    }, errors => this.load.hide());
   }
 
   openDialog(detail: OrderDetailShopper): void {

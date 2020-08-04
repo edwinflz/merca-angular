@@ -54,6 +54,7 @@ export class ListProfileComponent implements OnInit {
         this.success = data.exito;
         this.profile = false;
         this.infoShopper = data.shopper;
+        this.shopperSuccess = false;
       }
     }, error => {
       this.spinner.hide();
