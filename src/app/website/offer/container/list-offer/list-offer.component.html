@@ -1,14 +1,6 @@
-<div
-  class="container h-100 mt-4 mb-5 overflow-hidden"
->
-  <!-- <app-spinner *ngIf="offers.length == 0" [spinner]="true"></app-spinner> -->
-
-  <div class="row" *ngIf="offers.length != 0">
-    <div class="col-12 mb-2 mt-2">
-      <mat-card class="rounded-lg p-2 bg-purple">
-        <h1 class="text-center separate">Revisa tús ofertas!</h1>
-      </mat-card>
-    </div>
+<div class="containermt-2 mb-5 pb-5 overflow-hidden">
+  <div class="col-12 mb-2 mt-2" *ngIf="offers.length != 0">
+    <mat-card-title>Revisa tús ofertas!</mat-card-title>
   </div>
 
   <div class="row p-2" *ngIf="offers.length != 0">
@@ -19,4 +11,29 @@
       <app-card-offer [offer]="offer" [index]="index"></app-card-offer>
     </div>
   </div>
+
+  <div class="col-12 mb-2 mt-2" *ngIf="offersAccept.length != 0">
+    <mat-card-title>Ofertas aceptadas!</mat-card-title>
+  </div>
+
+  <div class="row p-2" *ngIf="offersAccept.length != 0">
+    <div
+      class="col-12 col-md-6 col-lg-6"
+      *ngFor="let offer of offersAccept; let index = index"
+    >
+      <app-card-offer-accept
+        [offer]="offer"
+        [index]="index"
+      ></app-card-offer-accept>
+    </div>
+  </div>
+
+  <ngx-spinner
+    bdColor="rgba(0,25,92,0.8)"
+    color="#fff"
+    type="ball-clip-rotate-multiple"
+    zIndex="50"
+  >
+    <p class="loading">Cargando nuevas ofertas...</p>
+  </ngx-spinner>
 </div>

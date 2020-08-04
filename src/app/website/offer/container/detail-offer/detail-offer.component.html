@@ -1,74 +1,118 @@
-<div class="container mt-4 mb-4">
+<div class="container mt-2 mb-5 pb-5">
+  <div class="row">
+    <div class="col-12 mb-2 mt-2">
+      <mat-card-title>Nota!</mat-card-title>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-12">
-      <mat-card>
-        <div class="row">
-          <div class="col-6">
-            <span class="badge badge-success btn btn-block">TIENE</span>
-          </div>
-          <div class="col-6">
-            <span class="badge badge-danger btn btn-block">NO TIENE</span>
-          </div>
+      <div class="alert alert-success" role="alert">
+        Verde: Significa que el negocio tiene el producto que requieres!.
+      </div>
+      <div class="alert alert-danger" role="alert">
+        Rojo: Significa que el negocio no tiene el producto que requieres, pero
+        aún asi recibes una oferta de su parte.
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <mat-card-title>Detalle de la oferta!</mat-card-title>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="row" *ngIf="offerDetail">
+        <div class="col-12 text-center">
+          <button
+            mat-raised-button
+            (click)="showPriceTable()"
+            class="rounded-lg bg-third-color"
+            *ngIf="offerDetail.visibilityPrice == 1"
+          >
+            Ver precios
+          </button>
         </div>
-        <div class="row mt-3" *ngIf="offerDetail">
-          <div class="col-12 text-center">
-            <button
-              mat-raised-button
-              color="accent"
-              (click)="showPriceTable()"
-              *ngIf="offerDetail.visibilityPrice == 1"
+      </div>
+      <div class="row" *ngIf="offerDetail">
+        <div class="col-12 mt-2 mb-2 rounded pt-3 pb-3">
+          <mat-card>
+            <table class="table table-striped mat-elevation-z8">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Detalle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let detail of offerDetail.details; let index = index"
+                  [className]="detail.price ? 'table-success' : 'table-danger'"
+                  class="text-center"
+                >
+                  <th scope="row">{{ index + 1 }}</th>
+                  <td>
+                    {{ detail.product }} x {{ detail.amount }}
+                    {{ detail.measure }} {{ detail.brand }}
+                    <small *ngIf="showPrice">{{
+                      detail.price | currency
+                    }}</small>
+                  </td>
+                </tr>
+                <tr class="text-center table-info">
+                  <td colspan="2">Total: {{ offerDetail.total | currency }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              class="alert alert-success"
+              role="alert"
+              *ngIf="registerSuccess"
             >
-              VER PRECIO
-            </button>
-          </div>
+              Oferta aceptada!.
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="errors.length != 0"
+            >
+              <p *ngFor="let error of errors">
+                <strong>- {{ error }} </strong>
+              </p>
+            </div>
+          </mat-card>
         </div>
-        <div class="row" *ngIf="offerDetail">
-          <div class="col-12 mt-2 mb-2 rounded pt-3 pb-3">
-            <mat-card>
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Detalle</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    *ngFor="
-                      let detail of offerDetail.details;
-                      let index = index
-                    "
-                    [className]="
-                      detail.price ? 'table-success' : 'table-danger'
-                    "
-                    class="text-center"
-                  >
-                    <th scope="row">{{ index + 1 }}</th>
-                    <td>
-                      {{ detail.product }} x {{ detail.amount }}
-                      {{ detail.measure }} {{ detail.brand }}
-                      <small *ngIf="showPrice">{{
-                        detail.price | currency
-                      }}</small>
-                    </td>
-                  </tr>
-                  <tr class="text-center">
-                    <td colspan="2">
-                      Total: {{ offerDetail.total | currency }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </mat-card>
-          </div>
-          <div class="col-6">
-            <button mat-raised-button color="primary">ME INTERESA</button>
-          </div>
-          <div class="col-6">
-            <button mat-raised-button color="warn">NO ME INTERESA</button>
-          </div>
+        <div class="col-6">
+          <button
+            mat-raised-button
+            class="bg-primary-color rounded-lg"
+            (click)="offerAccept(offerDetail.id, orderId)"
+          >
+            Me interesa
+          </button>
         </div>
-      </mat-card>
+        <div class="col-6">
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="offerCancel(offerDetail.id)"
+          >
+            No me interesa
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<ngx-spinner
+  bdColor="rgba(0,25,92,0.8)"
+  color="#fff"
+  type="ball-clip-rotate-multiple"
+  zIndex="300"
+>
+  <p class="loading">Cargando la oferta...</p>
+</ngx-spinner>

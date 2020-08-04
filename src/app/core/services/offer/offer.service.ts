@@ -23,8 +23,8 @@ export class OfferService {
     private tokenService: TokenService
   ) { }
 
-  getOffersToShopper(): Observable<OfferShopper[]> {
-    return this.http.get(`${this.url}/${this.tokenService.getUser()}/shopper`).pipe(
+  getOffersToShopper(orderStatus: number, offerStatus: number): Observable<OfferShopper[]> {
+    return this.http.get(`${this.url}/${this.tokenService.getUser()}/${orderStatus}/${offerStatus}/shopper`).pipe(
       map((response: any) => response.data as OfferShopper[])
     );
   }
@@ -33,5 +33,13 @@ export class OfferService {
     return this.http.get(`${this.url}/${id}/detail`).pipe(
       map((response: any) => response.data as OfferDetailShopper)
     );
+  }
+
+  offerAccept(id: number, orderId: number) {
+    return this.http.get(`${this.url}/${id}/${orderId}/accept`);
+  }
+
+  offerCancel(id: number) {
+    return this.http.get(`${this.url}/${id}/cancel`);
   }
 }

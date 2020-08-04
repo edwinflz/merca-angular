@@ -37,17 +37,25 @@
       > -->
     </div>
     <div class="col-lg-6 col-6 p-2 card__img--container">
-      <img alt="negocio" class="card__img" [defaultImage]="spinner"
-      [lazyLoad]="offer.photo" />
+      <img
+        alt="negocio"
+        class="card__img"
+        [defaultImage]="spinner"
+        [lazyLoad]="offer.photo"
+      />
     </div>
     <div class="col-lg-6 col-6">
       <div class="card-body">
-        <mat-chip-list aria-label="Fish selection">
+        <mat-chip-list>
           <mat-chip>{{ offer.total | currency }}</mat-chip>
-          <mat-chip color="accent" selected [routerLink]="[offer.offerId]"
-            >VER</mat-chip
-          >
         </mat-chip-list>
+        <button
+          mat-raised-button
+          class="btn-block mt-1 bg-primary-color rounded-lg"
+          [routerLink]="[offer.offerId, offer.orderId]"
+        >
+          Ver oferta
+        </button>
       </div>
     </div>
   </div>

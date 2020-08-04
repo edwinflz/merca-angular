@@ -7,4 +7,5 @@ export interface OfferShopper {
     offerId: number;
     dateOffer: Date;
     total: number;
+    phone: number;
 }
