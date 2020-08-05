@@ -14,7 +14,7 @@ export class CreateProfileComponent implements OnInit {
   @Input() municipalities: Municipality[];
   @Input() user: string;
   @Output() sendFormData: EventEmitter<any> = new EventEmitter();
-  readonly maxSize = 200000;
+  readonly maxSize = 400000;
 
 
   constructor(
@@ -70,7 +70,6 @@ export class CreateProfileComponent implements OnInit {
     formData.append('domicile', this.domicileField.value);
     formData.append('domicileTwo', this.domicileTwoField.value);
     formData.append('domicileThree', this.domicileThreeField.value);
-    formData.append('profile', fileForm.files[0]);
     formData.append('userId', this.user);
 
 

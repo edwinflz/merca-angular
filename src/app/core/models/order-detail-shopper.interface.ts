@@ -4,11 +4,11 @@ export interface OrderDetailShopper {
     date: Date;
     paymentEfective: number;
     paymentTarjeta: number;
-    details: {
+    details: [{
         id: number;
         product: string;
         brand: string;
         amount: number;
         measure: string;
-    };
+    }];
 }

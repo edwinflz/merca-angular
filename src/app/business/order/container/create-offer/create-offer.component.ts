@@ -17,8 +17,6 @@ export class CreateOfferComponent implements OnInit {
   order: OrderDetailShopper;
   orderTotal: number;
   form: FormGroup;
-  details;
-
 
   constructor(
     private router: Router,
@@ -30,34 +28,21 @@ export class CreateOfferComponent implements OnInit {
 
   ngOnInit(): void {
     this.tryOrderId();
-    this.buildForm();
   }
 
-  private buildForm(): void {
+  private buildForm() {
     this.form = this.formBuilder.group({
-      prices: this.formBuilder.array([
-        this.formBuilder.group({
-          id: [0],
-          price: [0]
-        })
-      ])
+      details: this.formBuilder.array([this.createItem()])
     });
   }
 
-  get prices() {
-    return this.form.get('prices') as FormArray;
+  createItem(): FormGroup {
+    return this.formBuilder.group({
+      id: '',
+      amount: '',
+      price: '',
+    });
   }
-
-  addNewPrices() {
-    this.prices.push(
-      this.formBuilder.group({
-        id: [0],
-        price: [0]
-      })
-    )
-  }
-
-
 
   tryOrderId(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -66,12 +51,20 @@ export class CreateOfferComponent implements OnInit {
     });
   }
 
+  detailsField() {
+    return this.form.get('details') as FormArray;
+  }
+
   fetchOrder(id: number): void {
     this.spinner.show();
     this.orderService.getOrderDetailShopper(id).subscribe(order => {
       this.spinner.hide();
       this.order = order;
     }, errors => this.spinner.hide());
+  }
+
+  confirmProduct($detail, $price) {
+
   }
 
   showPrices(): void {

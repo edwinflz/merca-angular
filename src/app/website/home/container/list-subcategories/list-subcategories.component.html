@@ -1,4 +1,18 @@
-<section class="container mb-5 pb-5">
+<section
+  class="container mb-5 pb-5"
+  [ngClass]="{
+    'height-full': dataFound
+  }"
+>
+  <div class="row justify-content-center align-items-center" *ngIf="dataFound">
+    <div class="col-12">
+      <div class="alert alert-warning text-center" role="alert">
+        <i class="far fa-surprise font-60 text-center"></i> <br />
+       Lo sentimos, no se pudo cargar información. <br/>
+      </div>
+    </div>
+  </div>
+
   <div class="row" *ngFor="let category of categories">
     <div class="col-12 mb-2 mt-2">
       <mat-card-title>{{ category.name }}</mat-card-title>

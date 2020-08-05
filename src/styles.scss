@@ -9,8 +9,8 @@
   --second-color: #253cc0;
   --third-color: #4a89dc;
   /* ------- Tipografia */
-  --fuente-lato: 'Lato', sans-serif;
-  --fuente-oswald: 'Oswald', sans-serif;
+  --fuente-lato: "Lato", sans-serif;
+  --fuente-oswald: "Oswald", sans-serif;
 }
 
 html,
@@ -61,8 +61,8 @@ button:focus {
   background: #d4d4d4;
 }
 
-.font-28 {
-  font-size: 28px !important;
+.font-60 {
+  font-size: 60px !important;
 }
 
 .font-14 {
@@ -75,20 +75,23 @@ button:focus {
 
 .bg-third-color {
   background-color: var(--second-color);
-  color: var(--white-color)
+  color: var(--white-color);
 }
 
 .bg-primary-color {
   background-color: var(--primary-color);
-  color: var(--white-color)
+  color: var(--white-color);
 }
 
 .font-blue-dark {
   color: var(--third-color);
 }
 
-.loading{
+.loading {
   color: white;
   padding-top: 50px;
 }
 
+.height-full {
+  height: 100vh !important;
+}

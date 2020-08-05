@@ -20,6 +20,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -44,6 +45,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatTabsModule,
     MatStepperModule,
     MatRadioModule,
+    MatExpansionModule
   ],
   exports: [
     MatToolbarModule,
@@ -65,6 +67,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatTabsModule,
     MatStepperModule,
     MatRadioModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }

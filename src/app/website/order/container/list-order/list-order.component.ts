@@ -16,6 +16,8 @@ export class ListOrderComponent implements OnInit {
 
   orders: OrderShopper[] = [];
   order: OrderDetailShopper;
+  dataFound: boolean;
+
 
   constructor(
     private orderService: OrderService,
@@ -24,6 +26,7 @@ export class ListOrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.dataFound = false;
     this.fetchOrders();
   }
 
@@ -32,7 +35,13 @@ export class ListOrderComponent implements OnInit {
     this.orderService.getOrdersToShopper().subscribe(orders => {
       this.orders = orders;
       this.load.hide();
-    }, errors => this.load.hide());
+      if (!this.orders) {
+        this.dataFound = true;
+      }
+    }, errors => {
+      this.load.hide();
+      this.dataFound = true;
+    });
   }
 
   openDialog(detail: OrderDetailShopper): void {

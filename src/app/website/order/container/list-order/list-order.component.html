@@ -1,9 +1,25 @@
-<div class="container mt-2 mb-5 pb-5 overflow-hidden">
-  <div class="col-12 mb-2 mt-2" *ngIf="orders.length != 0">
-    <mat-card-title>Revisa tús pedidos!</mat-card-title>
+<div
+  class="container mt-2 mb-5 pb-5 overflow-hidden"
+  [ngClass]="{
+    'height-full': dataFound
+  }"
+>
+  <div class="row justify-content-center align-items-center" *ngIf="dataFound">
+    <div class="col-12">
+      <div class="alert alert-warning text-center" role="alert">
+        <i class="far fa-surprise font-60 text-center"></i> <br />
+        Lo sentimos, no hay información que mostrar. <br />
+      </div>
+    </div>
   </div>
 
-  <div class="row p-2" *ngIf="orders.length != 0">
+  <div class="row" *ngIf="!dataFound">
+    <div class="col-12 mb-2 mt-2">
+      <mat-card-title>Revisa tús pedidos!</mat-card-title>
+    </div>
+  </div>
+
+  <div class="row p-2" *ngIf="!dataFound">
     <div
       class="col-12 col-md-4 col-lg-3"
       *ngFor="let order of orders; let index = index"

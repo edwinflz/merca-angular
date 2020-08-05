@@ -13,6 +13,8 @@ export class ListOfferComponent implements OnInit {
 
   offers: OfferShopper[] = [];
   offersAccept: OfferShopper[] = [];
+  dataFound: boolean;
+  dataAccept: boolean;
 
   constructor(
     private offerService: OfferService,
@@ -20,6 +22,8 @@ export class ListOfferComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.dataFound = false;
+    this.dataAccept = false;
     this.fetchOrders();
     this.fetchOffersAccept();
   }
@@ -29,14 +33,26 @@ export class ListOfferComponent implements OnInit {
     this.offerService.getOffersToShopper(1, 1).subscribe(offers => {
       this.load.hide();
       this.offers = offers;
-    }, errors => this.load.hide());
+      if (!this.offers || this.offers.length === 0) {
+        this.dataFound = true;
+      }
+    }, errors => {
+      this.load.hide();
+      this.dataFound = true;
+    });
   }
 
   fetchOffersAccept(): void {
     this.offerService.getOffersToShopper(2, 2).subscribe(offers => {
       this.load.hide();
       this.offersAccept = offers;
-    }, errors => this.load.hide());
+      if (!this.offersAccept || this.offersAccept.length === 0) {
+        this.dataAccept = true;
+      }
+    }, errors => {
+      this.load.hide();
+      this.dataAccept = true;
+    });
   }
 
 }

@@ -126,12 +126,15 @@ export class WelcomeComponent implements OnInit {
   }
 
   showFormLogin(): void {
+    this.errors.length = 0;
+    this.registerSuccess = false;
     this.showLogin = true;
     this.login = true;
   }
 
 
   showFormRegister(): void {
+    this.errors.length = 0;
     this.showLogin = true;
     this.login = false;
   }

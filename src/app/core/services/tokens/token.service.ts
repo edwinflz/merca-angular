@@ -19,6 +19,10 @@ export class TokenService {
     localStorage.setItem('name', name);
   }
 
+  saveShopper(hasProfile: string): void {
+    localStorage.setItem('hasProfile', hasProfile);
+  }
+
   getToken(): string {
     return localStorage.getItem('token');
   }
@@ -31,10 +35,15 @@ export class TokenService {
     return localStorage.getItem('name');
   }
 
+  getHasProfile(): string {
+    return localStorage.getItem('hasProfile');
+  }
+
   removeItems(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     localStorage.removeItem('name');
+    localStorage.removeItem('hasProfile');
   }
 
 

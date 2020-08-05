@@ -1,16 +1,19 @@
 <mat-card>
   <mat-card-content>
-    <div class="image">
+    <div class="image text-center">
       <img
         [alt]="shopper.perfil"
         [defaultImage]="spinner"
         [lazyLoad]="url"
-        class="img-fluid"
+        class="img-fluid rounded-circle"
       />
     </div>
     <mat-list role="list">
-      <mat-list-item role="listitem"
-        >Domicilio principal: {{ shopper.domicilio }}</mat-list-item
+      <mat-list-item role="listitem">
+        <strong>
+          Domicilio principal:
+        </strong>
+        {{ shopper.domicilio }}</mat-list-item
       >
       <mat-list-item role="listitem"
         >Domicilios opcionales: {{ shopper.domicilio_dos }} -

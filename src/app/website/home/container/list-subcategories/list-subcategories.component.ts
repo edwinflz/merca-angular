@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
+import { DialogSubcategoriesComponent } from '../dialog-subcategories/dialog-subcategories.component';
+
 import { Category } from '@core/models/categories.interface';
 import { SubCategory } from '@core/models/subcategories.interface';
 
-import { DialogSubcategoriesComponent } from '../dialog-subcategories/dialog-subcategories.component';
 import { SubcategoryService } from '@core/services/subcategory/subcategory.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -18,6 +19,7 @@ export class ListSubcategoriesComponent implements OnInit {
 
   categories: Category[] = [];
   subcategory: SubCategory;
+  dataFound: boolean;
   spinner = 'assets/img/spinner.gif';
 
   customOptions: OwlOptions = {
@@ -46,21 +48,29 @@ export class ListSubcategoriesComponent implements OnInit {
   };
 
   constructor(
-    private subcategoryService: SubcategoryService,
     public dialog: MatDialog,
+    private subcategoryService: SubcategoryService,
     private load: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
+    this.dataFound = false;
     this.fetchCategories();
   }
+
 
   fetchCategories(): void {
     this.load.show();
     this.subcategoryService.getAllCategories().subscribe(categories => {
       this.load.hide();
       this.categories = categories;
-    }, errors => this.load.hide());
+      if (this.categories.length === 0) {
+        this.dataFound = true;
+      }
+    }, errors => {
+      this.load.hide();
+      this.dataFound = true;
+    });
   }
 
   openDialog(sub: SubCategory): void {
@@ -70,7 +80,6 @@ export class ListSubcategoriesComponent implements OnInit {
       }
     });
   }
-
 
 
 }
