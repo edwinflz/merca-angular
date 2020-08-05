@@ -1,38 +1,54 @@
-<div class="container mt-4 mb-4">
-    <div class="row">
-      <div class="col-12">
-        <mat-card>
-          <div class="row no-gutters">
-            <div class="col-lg-12">
-              <div class="d-flex justify-content-between align-items-center">
-                <mat-card-title>Edwin Jose Florez Peralta</mat-card-title>
-              </div>
-            </div>
-            <div class="col-lg-12 text-center">
-              <mat-card-subtitle class="m-0"
-                >Pedido de Carnicos y Lácteos</mat-card-subtitle
-              >
-              <mat-card-subtitle class="m-0 mt-1"
-                >Calle 42 I # 17 - 71</mat-card-subtitle
-              >
-            </div>
-            <div class="col-lg-6 col-6 p-2 card__img--container">
-              <img
-                src="assets/img/restaurant.jpg"
-                alt="negocio"
-                class="card__img"
-              />
-            </div>
-            <div class="col-lg-6 col-6">
-              <div class="card-body">
-                <mat-chip-list aria-label="Fish selection">
-                  <mat-chip color="accent" selected [routerLink]="[1]">VER PEDIDO</mat-chip>
-                </mat-chip-list>
-              </div>
+<div class="container mt-2 mb-5 pb-5">
+  <div class="col-12 mb-2 mt-2" *ngIf="orders.length != 0">
+    <mat-card-title>Revisa pedidos y crea ofertas!</mat-card-title>
+  </div>
+
+  <div class="row" *ngIf="orders.length != 0">
+    <div class="col-12 col-lg-4 col-md-6" *ngFor="let order of orders">
+      <mat-card class="mb-2 mat-elevation-z8 rounded-lg">
+        <div class="row no-gutters">
+          <div class="col-lg-12">
+            <div class="d-flex justify-content-between align-items-center">
+              <mat-card-title>{{ order.nameUser }}</mat-card-title>
             </div>
           </div>
-        </mat-card>
-      </div>
+          <div class="col-lg-12 text-center">
+            <mat-card-subtitle class="m-0">{{
+              order.nameSubcategory
+            }}</mat-card-subtitle>
+            <mat-card-subtitle class="m-0 mt-1">{{
+              order.addressUser
+            }}</mat-card-subtitle>
+          </div>
+          <div class="col-lg-6 col-6 p-2 card__img--container">
+            <img
+              [defaultImage]="load"
+              [lazyLoad]="order.imgSubcategory"
+              class="card__img"
+            />
+          </div>
+          <div class="col-lg-6 col-6">
+            <div class="card-body">
+              <button
+                mat-raised-button
+                class="bg-primary-color rounded-pill"
+                [routerLink]="[order.orderId]"
+              >
+                Ver pedido
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-card>
     </div>
   </div>
-  
+</div>
+
+<ngx-spinner
+  bdColor="rgba(0,25,92,0.8)"
+  color="#fff"
+  type="ball-clip-rotate-multiple"
+  zIndex="300"
+>
+  <p class="loading">Cargando info...</p>
+</ngx-spinner>

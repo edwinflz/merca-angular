@@ -1,13 +1,37 @@
-<div class="container mt-3 mb-5 pb-5">
+<div class="container mt-2 mb-5 pb-5">
+  <div class="row" *ngIf="profile">
+    <div class="col-12 mb-2 mt-2">
+      <mat-card-title>Por favor tú negocio!</mat-card-title>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!profile">
+    <div class="col-12 mb-2 mt-2">
+      <mat-card-title>Mi negocio!</mat-card-title>
+    </div>
+  </div>
   <div class="row justify-content-center align-items-center">
     <div class="col-12">
-      <mat-card>
-        <mat-card-title>Registra tú negocio</mat-card-title>
+      <mat-card class="mat-elevation-z8">
         <mat-card-content>
-          <app-profile *ngIf="!profile"></app-profile>
+          <div class="alert alert-success" role="alert" *ngIf="businessSuccess">
+            {{ success }}
+          </div>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="errors.length != 0"
+          >
+            <p *ngFor="let error of errors">
+              <strong>- {{ error }} </strong>
+            </p>
+          </div>
+          <!-- <app-profile [business]="infoBusiness" *ngIf="!profile"></app-profile> -->
           <app-create-profile
             *ngIf="profile"
+            (sendFormData)="saveBusiness($event)"
             [municipalities]="municipalities"
+            [user]="user"
             [categories]="categories"
           ></app-create-profile>
         </mat-card-content>

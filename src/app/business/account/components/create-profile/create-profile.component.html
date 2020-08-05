@@ -16,6 +16,16 @@
           >
         </mat-select>
       </mat-form-field>
+      <mat-form-field class="w-100" appearance="fill">
+        <mat-label>Nombre Negocio*</mat-label>
+        <input
+          matInput
+          type="text"
+          id="name"
+          placeholder="Digite el nombre de su negocio"
+          formControlName="name"
+        />
+      </mat-form-field>
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Direccion del negocio*</mat-label>
         <input
@@ -27,13 +37,26 @@
         />
         <mat-icon matSuffix>bubble_chart</mat-icon>
       </mat-form-field>
+
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Número celular de contacto*</mat-label>
+        <input
+          matInput
+          type="number"
+          id="phone"
+          placeholder="Digite # celular"
+          formControlName="phone"
+        />
+        <mat-icon matSuffix>bubble_chart</mat-icon>
+      </mat-form-field>
+
       <p>
         Al continuar Aceptas que la aplicacion Pido y merco o alguien de la
         empresa se contacte por correo, telefono o mensaje, para dar informacion
         o establecer confirmaciones.
       </p>
       <div>
-        <button mat-button matStepperNext>Siguiente</button>
+        <button mat-button matStepperNext class="bg-primary-color">Siguiente</button>
       </div>
     </form>
   </mat-step>
@@ -76,7 +99,7 @@
       </div>
       <div>
         <button mat-button matStepperPrevious>Regresar</button>
-        <button mat-button matStepperNext>Siguiente</button>
+        <button mat-button matStepperNext class="bg-primary-color">Siguiente</button>
       </div>
     </form>
   </mat-step>
@@ -93,7 +116,7 @@
     <p>*Cedula de ciudadania.</p>
     <div>
       <button mat-button matStepperPrevious>Regresar</button>
-      <button mat-button matStepperNext>Siguiente</button>
+      <button mat-button matStepperNext class="bg-primary-color">Siguiente</button>
     </div>
   </mat-step>
   <mat-step [stepControl]="threeFormGroup">
@@ -203,7 +226,7 @@
 
       <div>
         <button mat-button matStepperPrevious>Regresar</button>
-        <button mat-button matStepperNext>Siguiente</button>
+        <button mat-button matStepperNext class="bg-primary-color">Siguiente</button>
       </div>
     </form>
   </mat-step>
@@ -222,6 +245,7 @@
           placeholder="Subir Foto"
           valuePlaceholder="Seleccione las fotos al mismo tiempo"
           required
+          accept="image/*"
           multiple
         ></ngx-mat-file-input>
 
@@ -301,7 +325,7 @@
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Regresar</button>
-        <button mat-button matStepperNext>Siguiente</button>
+        <button mat-button matStepperNext class="bg-primary-color">Siguiente</button>
       </div>
     </form>
   </mat-step>
@@ -309,7 +333,7 @@
     <ng-template matStepLabel>Ultimo Paso</ng-template>
     <p>¿Deseas registrar tú negocio?.</p>
     <div>
-      <button mat-raised-button color="primary" class="btn-block">
+      <button mat-raised-button color="primary" class="btn-block" (click)="sendDataBusiness($event)">
         REGISTRARSE
       </button>
     </div>

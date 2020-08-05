@@ -21,4 +21,8 @@ export class BusinessService {
   userHasProfileSalesman() {
     return this.http.get(`${this.url}/${this.tokenService.getUser()}`);
   }
+
+  createBusiness(business) {
+    return this.http.post(this.url, business);
+  }
 }

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './auth/login/login.component';
 
+import { AuthGuard } from '@core/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -13,7 +14,13 @@ const routes: Routes = [
   {
     path: 'salesman',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
+      {
+        path: '/',
+        redirectTo: '/order',
+        pathMatch: 'full',
+      },
       {
         path: 'order',
         loadChildren: () => import('./order/order.module').then(m => m.OrderModule),

@@ -10,6 +10,7 @@ import { SaveOrder } from '@core/models/order-save.interface';
 import { OrderShopper } from '@core/models/orders-shopper.interface';
 import { TokenService } from '../tokens/token.service';
 import { OrderDetailShopper } from '@core/models/order-detail-shopper.interface';
+import { OrderBusiness } from '@core/models/orders-business.interface';
 
 
 @Injectable({
@@ -27,6 +28,12 @@ export class OrderService {
   getOrdersToShopper(): Observable<OrderShopper[]> {
     return this.http.get(`${this.url}/${this.tokenService.getUser()}/shopper`).pipe(
       map((response: any) => response.data as OrderShopper[])
+    );
+  }
+
+  getOrdersToBusiness(): Observable<OrderBusiness[]> {
+    return this.http.get(`${this.url}/${this.tokenService.getUser()}/business`).pipe(
+      map((response: any) => response.data as OrderBusiness[])
     );
   }
 
