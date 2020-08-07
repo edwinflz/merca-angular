@@ -1,0 +1,7 @@
+export interface OffersStatus {
+    id: number;
+    date: Date;
+    visibility: number;
+    total: number;
+    status: number;
+}

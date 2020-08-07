@@ -10,17 +10,15 @@
         id="commentary"
       ></textarea>
     </mat-form-field>
-    <mat-form-field class="w-100" appearance="fill">
-      <mat-label>Metodo de Pago*</mat-label>
-      <mat-select formControlName="payment" id="payment">
-        <mat-option *ngFor="let option of payments" [value]="option">
-          {{ option }}</mat-option
-        >
-      </mat-select>
-      <mat-error *ngIf="paymentField.hasError('required')"
-        >Este campo es requerido.</mat-error
-      >
-    </mat-form-field>
+    <mat-label>¿Deseas que tús precios sean visibles al comprador?</mat-label>
+    <br />
+    <mat-radio-group
+      aria-label="Select an option"
+      formControlName="visibilityPrice"
+    >
+      <mat-radio-button value="1">Si</mat-radio-button>
+      <mat-radio-button value="0">No</mat-radio-button>
+    </mat-radio-group>
   </form>
 </div>
 <div mat-dialog-actions>
@@ -33,7 +31,7 @@
         [disabled]="form.invalid"
         class="mb-2 bg-primary-color btn-block"
       >
-        ENVIAR PEDIDO
+        ENVIAR OFERTA
       </button>
     </div>
     <div class="col-12 col-lg-6">

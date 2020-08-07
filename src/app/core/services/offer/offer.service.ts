@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment';
 import { TokenService } from '../tokens/token.service';
 import { OfferShopper } from '@core/models/offers-shopper.interface';
 import { OfferDetailShopper } from '@core/models/offer-detail-shopper.interface';
+import { OffersStatus } from '../../models/offers-status.interface';
 
 
 @Injectable({
@@ -41,5 +42,19 @@ export class OfferService {
 
   offerCancel(id: number) {
     return this.http.get(`${this.url}/${id}/cancel`);
+  }
+
+  offersStatus(status): Observable<OffersStatus[]> {
+    return this.http.get(`${this.url}/${this.tokenService.getUser()}/${status}/estado`).pipe(
+      map((response: any) => response.data as OffersStatus[])
+    );
+  }
+
+  createOffer(offer) {
+    return this.http.post(this.url, offer);
+  }
+
+  getUrlImage(): string {
+    return `${this.url}/business`;
   }
 }

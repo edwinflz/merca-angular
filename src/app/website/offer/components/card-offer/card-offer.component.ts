@@ -10,6 +10,7 @@ export class CardOfferComponent implements OnInit {
 
   @Input() offer: OfferShopper;
   @Input() index: number;
+  @Input() url: string;
 
   spinner = 'assets/img/spinner.gif';
 
@@ -17,6 +18,10 @@ export class CardOfferComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getImage(photo: string): string {
+    return `${this.url}/avatar/${photo}`;
   }
 
 }

@@ -15,6 +15,7 @@ export class ListOfferComponent implements OnInit {
   offersAccept: OfferShopper[] = [];
   dataFound: boolean;
   dataAccept: boolean;
+  url: string;
 
   constructor(
     private offerService: OfferService,
@@ -24,6 +25,7 @@ export class ListOfferComponent implements OnInit {
   ngOnInit(): void {
     this.dataFound = false;
     this.dataAccept = false;
+    this.url = this.offerService.getUrlImage();
     this.fetchOrders();
     this.fetchOffersAccept();
   }

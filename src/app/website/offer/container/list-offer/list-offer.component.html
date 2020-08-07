@@ -8,7 +8,7 @@
     <div class="col-12">
       <div class="alert alert-warning text-center" role="alert">
         <i class="far fa-surprise font-60 text-center"></i> <br />
-        Lo sentimos, no hay información que mostrar. <br />
+        Lo sentimos, no hay ofertas que mostrar. <br />
       </div>
     </div>
   </div>
@@ -24,14 +24,15 @@
       class="col-12 col-md-6 col-lg-6"
       *ngFor="let offer of offers; let index = index"
     >
-      <app-card-offer [offer]="offer" [index]="index"></app-card-offer>
+      <app-card-offer
+        [url]="url"
+        [offer]="offer"
+        [index]="index"
+      ></app-card-offer>
     </div>
   </div>
 
-  <div
-    class="row justify-content-center align-items-center"
-    *ngIf="dataAccept && !dataFound"
-  >
+  <div class="row justify-content-center align-items-center" *ngIf="dataAccept">
     <div class="col-12">
       <div class="alert alert-info text-center" role="alert">
         Aún no has aceptado ninguna oferta. <br />
@@ -39,13 +40,13 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="!dataAccept && !dataFound">
+  <div class="row" *ngIf="!dataAccept">
     <div class="col-12 mb-2 mt-2">
       <mat-card-title>Ofertas aceptadas!</mat-card-title>
     </div>
   </div>
 
-  <div class="row p-2" *ngIf="!dataAccept && !dataFound">
+  <div class="row p-2" *ngIf="!dataAccept">
     <div
       class="col-12 col-md-6 col-lg-6"
       *ngFor="let offer of offersAccept; let index = index"
@@ -53,6 +54,7 @@
       <app-card-offer-accept
         [offer]="offer"
         [index]="index"
+        [url]="url"
       ></app-card-offer-accept>
     </div>
   </div>
