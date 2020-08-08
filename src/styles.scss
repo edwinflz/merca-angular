@@ -9,8 +9,7 @@
   --second-color: #253cc0;
   --third-color: #4a89dc;
   /* ------- Tipografia */
-  --fuente-lato: "Lato", sans-serif;
-  --fuente-oswald: "Oswald", sans-serif;
+  --fuente-poppins: 'Poppins', sans-serif;
 }
 
 html,
@@ -19,7 +18,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: var(--fuente-oswald);
+  font-family: var(--fuente-poppins);
 }
 
 button:focus {

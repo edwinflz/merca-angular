@@ -4,4 +4,6 @@ export interface OffersStatus {
     visibility: number;
     total: number;
     status: number;
+    name: string;
+    uid: string;
 }

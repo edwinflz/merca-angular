@@ -35,7 +35,7 @@ export class ListOrderComponent implements OnInit {
     this.orderService.getOrdersToShopper().subscribe(orders => {
       this.orders = orders;
       this.load.hide();
-      if (!this.orders) {
+      if (!this.orders || this.orders.length === 0) {
         this.dataFound = true;
       }
     }, errors => {

@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
+
 import { TokenService } from '../tokens/token.service';
 import { environment } from '../../../../environments/environment';
 import { tap } from 'rxjs/operators';
@@ -16,7 +19,9 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private token: TokenService
+    private token: TokenService,
+    private af: AngularFireAuth,
+    private fd: AngularFireDatabase
   ) { }
 
 
@@ -43,9 +48,42 @@ export class AuthService {
     });
   }
 
+  updateUidUser(id: number, uid: string) {
+    return this.http.post(`${this.url}/uid`, {
+      id,
+      uid
+    });
+  }
 
-  logout(): void {
+  loginWithEmail(email: string, password: string) {
+    return this.af.signInWithEmailAndPassword(email, password);
+  }
+
+  registerWithEmail(email: string, password: string) {
+    return this.af.createUserWithEmailAndPassword(email, password);
+  }
+
+  createUserFirebase(user: any) {
+    return this.fd.object(`/users/${user.uid}`).set(user);
+  }
+
+  getStatus() {
+    return this.af.authState;
+  }
+
+  getUserById(uid: string) {
+    return this.fd.object(`/users/${uid}`);
+  }
+
+  logout(): Promise<void> {
     this.token.removeItems();
+    return this.af.signOut()
+      .then((success) => {
+        alert('Sesion cerrada con exito');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }
 

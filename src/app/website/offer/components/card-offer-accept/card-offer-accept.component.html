@@ -24,17 +24,14 @@
         <mat-chip-list>
           <mat-chip>{{ offer.total | currency }}</mat-chip>
         </mat-chip-list>
-        <a
-          href="https://api.whatsapp.com/send?phone=573003784390&text='hola he aceptado tu oferta'"
+
+        <button
+          mat-icon-button
+          class="btn-block mt-1 bg-primary-color rounded-lg"
+          [routerLink]="['/shopper', 'chat', offer.uid]"
         >
-          <button
-            mat-icon-button
-            class="btn-block mt-1 bg-primary-color rounded-lg"
-            [routerLink]="[offer.offerId]"
-          >
-            <mat-icon>chat</mat-icon>
-          </button>
-        </a>
+          <mat-icon>chat</mat-icon>
+        </button>
       </div>
     </div>
   </div>

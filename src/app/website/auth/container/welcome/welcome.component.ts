@@ -43,13 +43,22 @@ export class WelcomeComponent implements OnInit {
         if (data.status === 404) {
           this.pushError(data.error);
         } else {
-          this.loginSuccess = true;
-          this.redirectLogin();
+          this.loginFirebase(email, password);
         }
       }, error => {
         this.spinner.hide();
         this.processError(error);
       });
+  }
+
+  loginFirebase(email: string, password: string) {
+    this.auth.loginWithEmail(email, password).then((data) => {
+      this.loginSuccess = true;
+      this.redirectLogin();
+    }).catch((error) => {
+      this.spinner.hide();
+      console.log(error);
+    });
   }
 
   registerUser({ name, email, password }): void {
@@ -61,7 +70,7 @@ export class WelcomeComponent implements OnInit {
         if (data.status === 404) {
           this.pushError(data.error);
         } else {
-          this.registerSuccess = true;
+          this.registerFirebase(data.user, name, email, password);
         }
       }, error => {
         this.spinner.hide();
@@ -69,6 +78,43 @@ export class WelcomeComponent implements OnInit {
       });
   }
 
+  registerFirebase(user: number, name: string, email: string, password: string): void {
+    this.errors.length = 0;
+    this.auth.registerWithEmail(email, password).then((data) => {
+      this.createUsers(data, name, email);
+      this.updateUidUserApi(user, data.user.uid);
+    }).catch((error) => {
+      this.pushError('Error al registrar el usuario: Auth Firebase');
+      console.log(error);
+    });
+  }
+
+  updateUidUserApi(user: number, uid: string): void {
+    this.errors.length = 0;
+    this.auth.updateUidUser(user, uid).subscribe((data: MessageServer) => {
+      this.spinner.hide();
+      if (data.status === 404) {
+        this.pushError(data.error);
+      }
+    });
+  }
+
+  createUsers(data: any, name: string, email: string): void {
+
+    const user = {
+      uid: data.user.uid,
+      email,
+      nick: name
+    };
+    this.errors.length = 0;
+    this.auth.createUserFirebase(user).then((result) => {
+      this.registerSuccess = true;
+    }).catch((error) => {
+      this.pushError('Error al registrar el usuario: Database Firebase');
+      console.log(error);
+    });
+
+  }
 
   processError(error): void {
     this.loginSuccess = false;

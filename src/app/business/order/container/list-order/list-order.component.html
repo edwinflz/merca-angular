@@ -54,7 +54,7 @@
     </div>
   </div>
 
-  <div
+  <!-- <div
     class="row justify-content-center align-items-center"
     *ngIf="dataActive"
   >
@@ -63,7 +63,7 @@
         Aún no has realizado ninguna oferta. <br />
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="row" *ngIf="!dataActive">
     <div class="col-12 mb-2 mt-2">
@@ -105,7 +105,7 @@
     </div>
   </div>
 
-  <div
+  <!-- <div
     class="row justify-content-center align-items-center"
     *ngIf="dataAccept"
   >
@@ -114,7 +114,7 @@
         Ofertas en estado recibido, esperando respuesta. <br />
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="row" *ngIf="!dataAccept">
     <div class="col-12 mb-2 mt-2">
@@ -141,6 +141,10 @@
                 offer.visibility ? "Precios visibles" : "Precios no visibles"
               }}</mat-card-subtitle
             >
+
+            <mat-card-subtitle class="mt-1 m-0">{{
+              offer.name
+            }}</mat-card-subtitle>
           </div>
 
           <div class="col-lg-6 col-6">
@@ -148,16 +152,13 @@
               <mat-chip-list>
                 <mat-chip>{{ offer.total | currency }}</mat-chip>
               </mat-chip-list>
-              <a
-                href="https://api.whatsapp.com/send?phone=573003784390&text='hola he aceptado tu oferta'"
+              <button
+                mat-icon-button
+                class="btn-block mt-1 bg-primary-color rounded-lg"
+                [routerLink]="['/business', 'salesman', 'chat', offer.uid]"
               >
-                <button
-                  mat-icon-button
-                  class="btn-block mt-1 bg-primary-color rounded-lg"
-                >
-                  <mat-icon>chat</mat-icon>
-                </button>
-              </a>
+                <mat-icon>chat</mat-icon>
+              </button>
             </div>
           </div>
         </div>

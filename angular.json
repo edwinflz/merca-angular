@@ -23,6 +23,15 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "allowedCommonJsDependencies": [
+              "firebase/app",
+              "@firebase/app",
+              "@firebase/database",
+              "@firebase/firestore",
+              "@firebase/auth",
+              "@firebase/util",
+              "@firebase/component"
+          ],
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",

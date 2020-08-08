@@ -28,6 +28,10 @@ const routes: Routes = [
       {
         path: 'account',
         loadChildren: () => import('./account/account.module').then(m => m.AccountModule)
+      },
+      {
+        path: 'chat',
+        loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
       }
     ]
   }

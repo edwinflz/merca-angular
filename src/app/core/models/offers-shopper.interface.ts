@@ -8,4 +8,5 @@ export interface OfferShopper {
     dateOffer: Date;
     total: number;
     phone: number;
+    uid: string;
 }
