@@ -24,7 +24,7 @@ export class AuthService {
     private fd: AngularFireDatabase
   ) { }
 
-
+  
   loginRestApi(email: string, password: string) {
     return this.http.post(this.url, { email, password })
       .pipe(
@@ -55,6 +55,12 @@ export class AuthService {
     });
   }
 
+  deleteUser(id: number) {
+    return this.http.post(`${this.url}/delete`, {
+      id
+    });
+  }
+
   loginWithEmail(email: string, password: string) {
     return this.af.signInWithEmailAndPassword(email, password);
   }
@@ -79,7 +85,6 @@ export class AuthService {
     this.token.removeItems();
     return this.af.signOut()
       .then((success) => {
-        alert('Sesion cerrada con exito');
       })
       .catch((error) => {
         console.log(error);

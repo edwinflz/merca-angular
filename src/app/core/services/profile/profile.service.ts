@@ -29,6 +29,10 @@ export class ProfileService {
     return `${this.url}/avatar/${filename}`;
   }
 
+  getUrlImageProfile(): string {
+    return `${this.url}/avatar`;
+  }
+
 
 
 }

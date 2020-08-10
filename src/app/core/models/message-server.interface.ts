@@ -4,4 +4,5 @@ export interface MessageServer {
     msg?: string;
     exito?: string;
     user?: number;
+    token?: string;
 }

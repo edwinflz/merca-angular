@@ -6,4 +6,8 @@ export interface OffersStatus {
     status: number;
     name: string;
     uid: string;
+    photo: string;
+    domicile: string;
+    nameSubcategory: string;
+    imgSubcategory: string;
 }

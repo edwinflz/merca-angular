@@ -18,6 +18,7 @@ export class WelcomeComponent implements OnInit {
   registerSuccess: boolean;
   loginSuccess: boolean;
   errors: string[] = [];
+  token: string;
 
   constructor(
     private router: Router,
@@ -70,6 +71,7 @@ export class WelcomeComponent implements OnInit {
         if (data.status === 404) {
           this.pushError(data.error);
         } else {
+          this.token = data.token;
           this.registerFirebase(data.user, name, email, password);
         }
       }, error => {
@@ -84,6 +86,7 @@ export class WelcomeComponent implements OnInit {
       this.createUsers(data, name, email);
       this.updateUidUserApi(user, data.user.uid);
     }).catch((error) => {
+      this.deleteUser(user);
       this.pushError('Error al registrar el usuario: Auth Firebase');
       console.log(error);
     });
@@ -114,6 +117,14 @@ export class WelcomeComponent implements OnInit {
       console.log(error);
     });
 
+  }
+
+  deleteUser(id: number) {
+    this.auth.deleteUser(id).subscribe((result: MessageServer) => {
+      if (result.status === 200) {
+        console.log('ok deleted');
+      }
+    });
   }
 
   processError(error): void {

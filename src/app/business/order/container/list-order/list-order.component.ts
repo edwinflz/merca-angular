@@ -7,6 +7,7 @@ import { OrderService } from '@core/services/order/order.service';
 import { OrderBusiness } from '@core/models/orders-business.interface';
 import { OfferService } from '@core/services/offer/offer.service';
 import { OffersStatus } from '@core/models/offers-status.interface';
+import { ProfileService } from '@core/services/profile/profile.service';
 
 
 @Component({
@@ -25,18 +26,22 @@ export class ListOrderComponent implements OnInit {
   dataAccept: boolean;
   dataActive: boolean;
 
+  url: string;
+
   constructor(
     private router: Router,
     private businessService: BusinessService,
     private spinner: NgxSpinnerService,
     private orderService: OrderService,
-    private offerService: OfferService
+    private offerService: OfferService,
+    private profileService: ProfileService
   ) { }
 
   ngOnInit(): void {
     this.dataFound = false;
     this.dataAccept = false;
     this.dataActive = false;
+    this.url = this.profileService.getUrlImageProfile();
     this.checkUser();
   }
 
@@ -93,5 +98,10 @@ export class ListOrderComponent implements OnInit {
       this.dataAccept = true;
     });
   }
+
+  getImage(photo: string): string {
+    return `${this.url}/${photo}`;
+  }
+
 
 }
