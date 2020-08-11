@@ -88,7 +88,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   validateAmountDetail(): boolean {
-    return this.detail.length === 2;
+    return this.detail.length === 10;
   }
 
 
