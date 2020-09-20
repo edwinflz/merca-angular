@@ -2,6 +2,8 @@ export interface OfferDetailShopper {
     id: number;
     commentary: string;
     date: Date;
+    businessId: number;
+    subcategoryId: number;
     visibilityPrice: number;
     total: number;
     details: [{

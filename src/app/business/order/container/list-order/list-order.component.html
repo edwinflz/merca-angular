@@ -13,6 +13,18 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-12 text-center mb-2 mt-2">
+      <button
+        mat-raised-button
+        class="mt-1 bg-primary-color rounded-lg"
+        (click)="loadRequest()"
+      >
+        Cargar nuevos pedidos
+      </button>
+    </div>
+  </div>
+
   <div class="col-12 mb-2 mt-2" *ngIf="!dataFound">
     <mat-card-title>Revisa pedidos y crea ofertas!</mat-card-title>
   </div>

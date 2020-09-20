@@ -19,6 +19,7 @@ export class CreateOrderComponent implements OnInit {
 
   detail: DetailOrder[] = [];
   subcategoryId: string;
+  businessId: string;
   errors: string[] = [];
   registerSuccess: boolean;
   addProduct: boolean;
@@ -35,18 +36,21 @@ export class CreateOrderComponent implements OnInit {
   ngOnInit(): void {
     this.registerSuccess = false;
     this.addProduct = false;
-    this.trySubcategoryId();
+    this.tryParametersId();
   }
 
-  trySubcategoryId(): void {
+  tryParametersId(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.subcategoryId = params.id;
+      this.businessId = params.business;
     });
   }
 
   receivedDetail(detail: DetailOrder): void {
     if (detail) {
-      this.validateAmountDetail() ? this.pushError('Espera!, Alcanzaste el máximo de items del pedido') : this.addDetail(detail);
+      this.validateAmountDetail()
+        ? this.pushError('Sigue pidiendo después de que escojas tu proveedor, máximo 10 unidades para oferta')
+        : this.addDetail(detail);
     }
   }
 
@@ -68,6 +72,7 @@ export class CreateOrderComponent implements OnInit {
     this.errors.length = 0;
     const data: SaveOrder = {
       subcategoryId: this.subcategoryId,
+      businessId: this.businessId,
       userId: this.tokenService.getUser(),
       ...header,
       details: [...this.detail]

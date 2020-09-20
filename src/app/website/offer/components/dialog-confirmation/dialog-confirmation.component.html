@@ -1,0 +1,58 @@
+<h1 mat-dialog-title>Confirmacion</h1>
+<div mat-dialog-content>
+  <p *ngIf="action == 'delete'">¿Estas seguro de rechazar esta oferta?</p>
+  <p *ngIf="action == 'accept'">
+    Si aceptas esta oferta, automaticamente las otras ofertas que hacen parte de
+    este pedido quedarán rechazadas,
+  </p>
+  <p *ngIf="action == 'accept'">
+    Si quieres aceptar esta oferta tienes 2 opciones: <br />
+    1.) Aceptar la oferta directamente. <br />
+    2.) Aceptar la oferta pero con la intención de hacer otro pedido al mismo
+    proveedor.
+  </p>
+</div>
+<div mat-dialog-actions>
+  <div class="row">
+    <div class="col-12">
+      <button
+        *ngIf="action == 'delete'"
+        mat-button
+        mat-raised-button
+        (click)="doAction('Delete')"
+        class="mb-2 bg-primary-color btn-block"
+      >
+        Rechazar oferta
+      </button>
+      <button
+        *ngIf="action == 'accept'"
+        mat-button
+        mat-raised-button
+        (click)="doAction('Accept')"
+        class="mb-2 bg-primary-color btn-block"
+      >
+        Aceptar oferta
+      </button>
+      <button
+        *ngIf="action == 'accept'"
+        mat-button
+        mat-raised-button
+        (click)="doAction('Create')"
+        class="mb-2 bg-primary-color btn-block"
+      >
+        Aceptar y realizar otro pedido
+      </button>
+    </div>
+    <div class="col-12">
+      <button
+        mat-button
+        (click)="doAction('Cancel')"
+        class="btn-block"
+        mat-flat-button
+        color="warn"
+      >
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>

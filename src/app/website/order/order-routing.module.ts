@@ -11,7 +11,7 @@ const routes: Routes = [
     component: ListOrderComponent
   },
   {
-    path: ':id',
+    path: ':id/:business',
     component: CreateOrderComponent
   }
 ];

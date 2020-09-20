@@ -89,7 +89,7 @@
           <button
             mat-raised-button
             class="bg-primary-color rounded-lg"
-            (click)="offerAccept(offerDetail.id, orderId)"
+            (click)="openDialog('accept', offerDetail.id, orderId)"
           >
             Me interesa
           </button>
@@ -98,7 +98,7 @@
           <button
             mat-raised-button
             color="warn"
-            (click)="offerCancel(offerDetail.id)"
+            (click)="openDialog('delete', offerDetail.id, orderId)"
           >
             No me interesa
           </button>

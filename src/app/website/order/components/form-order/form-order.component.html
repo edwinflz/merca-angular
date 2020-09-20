@@ -15,15 +15,15 @@
     </mat-error>
     <mat-icon matSuffix>shopping_cart</mat-icon>
   </mat-form-field>
-  <mat-form-field class="w-100" appearance="outline">
-    <mat-label>Cantidad*</mat-label>
+  <mat-form-field class="w-50" appearance="outline">
+    <mat-label>{{showAmount ? 'Cantidad': 'Precio'}}*</mat-label>
     <input
       matInput
       type="text"
       id="amount"
       [placeholder]="
         showAmount
-          ? 'Digite x peso: 10 kg,20 lb,5 ltr'
+          ? 'Digite x cantidad: 10 kg,20 lb,5 ltr'
           : 'Digite x precio: $5.000, $10.000'
       "
       formControlName="amount"
@@ -41,26 +41,23 @@
     </mat-error>
     <mat-icon matSuffix>bubble_chart</mat-icon>
   </mat-form-field>
-  <mat-slide-toggle (click)="showFieldMeasure()">
+  <mat-slide-toggle (click)="showFieldMeasure()" class="ml-2">
     <span *ngIf="showAmount">x PRECIO</span>
     <span *ngIf="!showAmount">x CANTIDAD</span>
   </mat-slide-toggle>
-  <mat-form-field *ngIf="showAmount" class="w-100" appearance="outline">
-    <mat-label>Medida</mat-label>
-    <input
-      matInput
-      type="text"
-      id="measure"
-      placeholder="Kg, Libra, Litro.."
-      formControlName="measure"
-    />
-    <mat-error *ngIf="measureField.errors && measureField.dirty">
-      <p *ngIf="measureField.hasError('required')">
-        El campo es requerido
-      </p>
-    </mat-error>
-    <mat-icon matSuffix>attach_money</mat-icon>
+
+  <mat-form-field *ngIf="showAmount" class="w-100" appearance="fill">
+    <mat-label>Medidas*</mat-label>
+    <mat-select formControlName="measure" id="measure">
+      <mat-option *ngFor="let option of measures" [value]="option">
+        {{ option }}</mat-option
+      >
+    </mat-select>
+    <mat-error *ngIf="measureField.hasError('required')"
+      >Este campo es requerido.</mat-error
+    >
   </mat-form-field>
+
   <mat-form-field class="w-100" appearance="outline">
     <mat-label>Marca</mat-label>
     <input

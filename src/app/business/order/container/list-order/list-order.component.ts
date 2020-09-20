@@ -59,12 +59,23 @@ export class ListOrderComponent implements OnInit {
     }, error => this.spinner.hide());
   }
 
+  loadRequest(): void {
+    this.orders.length = 0;
+    this.offersAccept.length = 0;
+    this.offersActives.length = 0;
+    this.fetchOrders();
+    this.fetchOffers();
+    this.fetchOffersAccept();
+  }
+
   fetchOrders(): void {
     this.spinner.show();
     this.orderService.getOrdersToBusiness().subscribe(orders => {
       this.orders = orders;
       if (!this.orders || this.orders.length === 0) {
         this.dataFound = true;
+      } else {
+        this.dataFound = false;
       }
       this.spinner.hide();
     }, errors => {
@@ -79,6 +90,8 @@ export class ListOrderComponent implements OnInit {
       this.offersActives = offers;
       if (!this.offersActives || this.offersActives.length === 0) {
         this.dataActive = true;
+      } else {
+        this.dataActive = false;
       }
     }, errors => {
       this.spinner.hide();
@@ -92,6 +105,8 @@ export class ListOrderComponent implements OnInit {
       this.offersAccept = offers;
       if (!this.offersAccept || this.offersAccept.length === 0) {
         this.dataAccept = true;
+      } else {
+        this.dataAccept = false;
       }
     }, errors => {
       this.spinner.hide();

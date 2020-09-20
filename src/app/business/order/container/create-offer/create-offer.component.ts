@@ -113,6 +113,7 @@ export class CreateOfferComponent implements OnInit {
   }
 
   confirmOrder(): void {
+    this.showTotal();
     if (this.orderTotal === 0) {
       this.pushError('Por favor digite el precio de al menos un producto solicitado por el comprador');
     } else {

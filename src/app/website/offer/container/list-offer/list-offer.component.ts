@@ -30,6 +30,13 @@ export class ListOfferComponent implements OnInit {
     this.fetchOffersAccept();
   }
 
+  loadRequest(): void {
+    this.offers.length = 0;
+    this.offersAccept.length = 0;
+    this.fetchOrders();
+    this.fetchOffersAccept();
+  }
+
   fetchOrders(): void {
     this.load.show();
     this.offerService.getOffersToShopper(1, 1).subscribe(offers => {
@@ -37,6 +44,8 @@ export class ListOfferComponent implements OnInit {
       this.offers = offers;
       if (!this.offers || this.offers.length === 0) {
         this.dataFound = true;
+      } else {
+        this.dataFound = false;
       }
     }, errors => {
       this.load.hide();
@@ -50,6 +59,8 @@ export class ListOfferComponent implements OnInit {
       this.offersAccept = offers;
       if (!this.offersAccept || this.offersAccept.length === 0) {
         this.dataAccept = true;
+      } else {
+        this.dataAccept = false;
       }
     }, errors => {
       this.load.hide();

@@ -13,6 +13,18 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-12 text-center mb-2 mt-2">
+      <button
+        mat-raised-button
+        class="mt-1 bg-primary-color rounded-lg"
+        (click)="loadRequest()"
+      >
+        Cargar nuevas ofertas
+      </button>
+    </div>
+  </div>
+
   <div class="row" *ngIf="!dataFound">
     <div class="col-12 mb-2 mt-2">
       <mat-card-title>Revisa tús ofertas!</mat-card-title>
@@ -21,7 +33,7 @@
 
   <div class="row p-2" *ngIf="!dataFound">
     <div
-      class="col-12 col-md-6 col-lg-6"
+      class="col-12 col-md-6 col-lg-4"
       *ngFor="let offer of offers; let index = index"
     >
       <app-card-offer
@@ -48,7 +60,7 @@
 
   <div class="row p-2" *ngIf="!dataAccept">
     <div
-      class="col-12 col-md-6 col-lg-6"
+      class="col-12 col-md-6 col-lg-4"
       *ngFor="let offer of offersAccept; let index = index"
     >
       <app-card-offer-accept

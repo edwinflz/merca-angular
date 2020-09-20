@@ -12,6 +12,8 @@ export class FormOrderComponent implements OnInit {
   form: FormGroup;
   @Output() sendDetail: EventEmitter<any> = new EventEmitter();
   showAmount: boolean;
+  measures: string[];
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,6 +21,7 @@ export class FormOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.showAmount = true;
+    this.measures = ['Kilogramo', 'Gramos', 'Miligramos', 'Libras', 'Cuatronza', 'Litro', 'Mililitro'];
     this.buildForm();
   }
 
