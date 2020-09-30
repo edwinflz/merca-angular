@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url_api: 'http://merca.test',
+  url_api: 'http://merca-backend.test',
   firebase: {
     apiKey: 'AIzaSyCBF2Pezg5ocIMsvWMqYQK380ypItEXh54',
     authDomain: 'pidemerca-5a272.firebaseapp.com',
