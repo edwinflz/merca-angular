@@ -5,16 +5,16 @@ import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-dialog-create-order',
   templateUrl: './dialog-create-order.component.html',
-  styleUrls: ['./dialog-create-order.component.scss']
+  styleUrls: ['./dialog-create-order.component.scss'],
 })
 export class DialogCreateOrderComponent implements OnInit {
-
   form: FormGroup;
   payments: string[];
 
-  constructor(private formBuilder: FormBuilder,
-              public dialogRef: MatDialogRef<DialogCreateOrderComponent>
-  ) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<DialogCreateOrderComponent>
+  ) {}
 
   ngOnInit(): void {
     this.payments = ['Efectivo', 'Tarjeta (Datafono)'];
@@ -39,10 +39,8 @@ export class DialogCreateOrderComponent implements OnInit {
 
   private buildForm(): void {
     this.form = this.formBuilder.group({
-      payment: ['', [Validators.required]],
+      payment: [this.payments[0], [Validators.required]],
       commentary: [''],
     });
   }
-
-
 }

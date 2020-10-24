@@ -22,7 +22,7 @@ export class DialogCreateOfferComponent implements OnInit {
 
   private buildForm(): void {
     this.form = this.formBuilder.group({
-      visibilityPrice: ['', [Validators.required]],
+      visibilityPrice: ['1', [Validators.required]],
       commentary: [''],
     });
   }

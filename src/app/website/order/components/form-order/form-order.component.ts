@@ -21,7 +21,7 @@ export class FormOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.showAmount = true;
-    this.measures = ['Kilogramo', 'Gramos', 'Miligramos', 'Libras', 'Cuatronza', 'Litro', 'Mililitro'];
+    this.measures = ['Kilogramo', 'Gramos', 'Miligramos', 'Libras', 'Onza', 'Litro', 'Mililitro', 'Metros', 'Centimetros'];
     this.buildForm();
   }
 
